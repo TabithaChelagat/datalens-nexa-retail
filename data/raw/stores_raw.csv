@@ -1,0 +1,23 @@
+store_id,store_name,region,city,manager
+ST001,Nexa Nairobi 1,Nairobi,Nairobi,Sarah Koech
+ST002,Nexa Nairobi 2,Nairobi,Nairobi,Amina Chebet
+ST003,Nexa Nairobi 3,Nairobi,Nairobi,Carol Wambui
+ST004,Nexa Nairobi 4,Nairobi,Nairobi,Peter Odhiambo
+ST005,Nexa Thika 5,Central,Thika,Joy Kiplagat
+ST006,Nexa Nyeri 6,Central,Nyeri,Irene Ochieng
+ST007,Nexa Machakos 7,Eastern,Machakos,Samuel Cheruiyot
+ST008,Nexa Mombasa 8,Coast,Mombasa,Peter Kamau
+ST009,Nexa Mombasa 9,Coast,Mombasa,Martin Kimani
+ST010,Nexa Malindi 10,COAST,Malindi,Daniel Wekesa
+ST011,Nexa Kisumu 11,Western,Kisumu,Ruth Muthoni
+ST012,Nexa Kisumu 12,western,Kisumu,Naomi Nyongesa
+ST013,Nexa Kakamega 13,Western,Kakamega,Ruth Nyongesa
+ST014,Nexa Kitale 14,Western,Kitale,Joy Chebet
+ST015,Nexa Nakuru 15,Rift Valley,Nakuru,Brian Odhiambo
+ST016,Nexa Nakuru 16,Rift valley,Nakuru,Victor Wambui
+ST017,Nexa Eldoret 17,Rift Valley,Eldoret,Martin Ochieng
+ST018,Nexa Eldoret 18,Rift Valley,Eldoret,Samuel Kimani
+ST019,Nexa Naivasha 19,Rift Valley,Naivasha,Amina Cheruiyot
+ST020,Nexa Nyeri 20,central,Nyeri,Wanjiku Mwangi
+ST001_DUP,Nexa Nairobi 1,Nairobi,Nairobi,Sarah Koech
+ST014_DUP,Nexa Kitale 14,Western,Kitale,Joy Chebet

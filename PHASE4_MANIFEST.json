@@ -1,0 +1,18 @@
+{
+  "project": "DataLens — Nexa Retail",
+  "phase": 4,
+  "deliverables": [
+    "working Streamlit analytics assistant",
+    "read-only SQL validator",
+    "approved-view allow-list",
+    "deterministic management questions",
+    "optional LLM natural-language SQL mode",
+    "Power BI dashboard build guide",
+    "DAX measure library",
+    "portfolio case study",
+    "end-to-end runbook"
+  ],
+  "status": "built and statically validated",
+  "llm_mode": "optional",
+  "database_execution": "not executed in build environment"
+}

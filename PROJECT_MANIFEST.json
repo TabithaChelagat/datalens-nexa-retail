@@ -1,0 +1,27 @@
+{
+  "project": "DataLens \u2014 Nexa Retail",
+  "period": "2024-01-01 to 2025-12-31",
+  "seed": 20260911,
+  "files": {
+    "raw": [
+      "customers_raw.csv",
+      "products_raw.csv",
+      "stores_raw.csv",
+      "orders_raw.csv",
+      "order_items_raw.csv",
+      "sales_targets_raw.csv"
+    ],
+    "reference": [
+      "customers_clean.csv",
+      "products_clean.csv",
+      "stores_clean.csv",
+      "orders_clean.csv",
+      "order_items_clean.csv",
+      "sales_targets_clean.csv"
+    ],
+    "benchmark": [
+      "injected_quality_benchmark.json"
+    ]
+  },
+  "validated_reference_integrity": true
+}

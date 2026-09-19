@@ -1,0 +1,21 @@
+{
+  "project": "DataLens — Nexa Retail",
+  "phase": 5,
+  "status": "built and statically validated",
+  "deliverables": [
+    "Dockerized PostgreSQL bootstrap",
+    "Dockerized Streamlit agent",
+    "Docker Compose standalone stack",
+    "GitHub .gitignore and CI validation",
+    "deployment runbook",
+    "architecture documentation"
+  ],
+  "deployment": {
+    "local": "Docker Compose",
+    "database": "PostgreSQL 16",
+    "agent": "Streamlit",
+    "optional_llm": true,
+    "power_bi": "separate consumer of governed PostgreSQL views"
+  },
+  "important_schema_correction": "Identifier columns use TEXT because generated IDs are strings such as CUST00001, ST001, PR001, ORD000001, ITEM0000001 and TGT00001."
+}

@@ -1,0 +1,25 @@
+name: DataLens validation
+on:
+  push:
+  pull_request:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install agent dependencies
+        run: pip install -r agent/requirements.txt
+      - name: Compile Python
+        run: python -m py_compile agent/app.py 02_data_quality_pipeline.py 01_generate_nexa_retail_data.py
+      - name: Validate SQL structure
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          required = ['sql/01_schema.sql','sql/03_kpi_views.sql','sql/04_validation.sql','agent/app.py']
+          missing=[p for p in required if not Path(p).exists()]
+          assert not missing, missing
+          print('Required project files: PASS')
+          PY

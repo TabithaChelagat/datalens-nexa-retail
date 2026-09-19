@@ -1,0 +1,149 @@
+{
+  "project": "DataLens \u2014 Nexa Retail",
+  "seed": 20260911,
+  "period": {
+    "start": "2024-01-01",
+    "end": "2025-12-31"
+  },
+  "expected_scale": {
+    "customers": 20000,
+    "products": 100,
+    "stores": 20,
+    "orders": 150000,
+    "order_items": 284367,
+    "sales_targets": 480
+  },
+  "injected_issues": [
+    {
+      "table": "customers",
+      "issue": "missing_email",
+      "affected_records": 600,
+      "details": {}
+    },
+    {
+      "table": "customers",
+      "issue": "missing_phone",
+      "affected_records": 400,
+      "details": {}
+    },
+    {
+      "table": "customers",
+      "issue": "inconsistent_city_labels",
+      "affected_records": 300,
+      "details": {
+        "Nairobi": "Nairobi ",
+        "Mombasa": "Mombasa City",
+        "Kisumu": "KISUMU",
+        "Nakuru": "Nakuru "
+      }
+    },
+    {
+      "table": "customers",
+      "issue": "future_date_of_birth",
+      "affected_records": 40,
+      "details": {}
+    },
+    {
+      "table": "customers",
+      "issue": "duplicate_customer_records",
+      "affected_records": 200,
+      "details": {}
+    },
+    {
+      "table": "products",
+      "issue": "inconsistent_category_labels",
+      "affected_records": 5,
+      "details": {}
+    },
+    {
+      "table": "products",
+      "issue": "missing_subcategory",
+      "affected_records": 5,
+      "details": {}
+    },
+    {
+      "table": "products",
+      "issue": "unit_cost_exceeds_selling_price",
+      "affected_records": 4,
+      "details": {}
+    },
+    {
+      "table": "stores",
+      "issue": "inconsistent_region_labels",
+      "affected_records": 4,
+      "details": {}
+    },
+    {
+      "table": "stores",
+      "issue": "duplicate_store_records",
+      "affected_records": 2,
+      "details": {}
+    },
+    {
+      "table": "orders",
+      "issue": "duplicate_order_ids",
+      "affected_records": 750,
+      "details": {}
+    },
+    {
+      "table": "orders",
+      "issue": "invalid_customer_foreign_keys",
+      "affected_records": 750,
+      "details": {}
+    },
+    {
+      "table": "orders",
+      "issue": "invalid_store_foreign_keys",
+      "affected_records": 450,
+      "details": {}
+    },
+    {
+      "table": "orders",
+      "issue": "inconsistent_payment_labels",
+      "affected_records": 1500,
+      "details": {}
+    },
+    {
+      "table": "orders",
+      "issue": "future_order_dates",
+      "affected_records": 150,
+      "details": {}
+    },
+    {
+      "table": "order_items",
+      "issue": "non_positive_quantity",
+      "affected_records": 1137,
+      "details": {}
+    },
+    {
+      "table": "order_items",
+      "issue": "invalid_product_foreign_keys",
+      "affected_records": 853,
+      "details": {}
+    },
+    {
+      "table": "order_items",
+      "issue": "abnormal_discount",
+      "affected_records": 2844,
+      "details": {}
+    },
+    {
+      "table": "order_items",
+      "issue": "price_mismatch_against_master",
+      "affected_records": 2844,
+      "details": {}
+    },
+    {
+      "table": "sales_targets",
+      "issue": "duplicate_store_month_targets",
+      "affected_records": 10,
+      "details": {}
+    },
+    {
+      "table": "sales_targets",
+      "issue": "missing_revenue_target",
+      "affected_records": 8,
+      "details": {}
+    }
+  ]
+}

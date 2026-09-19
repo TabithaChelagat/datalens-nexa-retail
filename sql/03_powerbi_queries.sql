@@ -1,0 +1,1 @@
+-- Connect Power BI to datalens.v_monthly_kpis, v_store_performance, v_category_performance, v_target_attainment and v_sales_detail.

@@ -1,0 +1,72 @@
+{
+  "project": "DataLens \u2014 Nexa Retail",
+  "phase": "Phase 2 \u2014 Data Quality & Cleaning",
+  "generated_at_utc": "2026-09-12T12:15:22.178669Z",
+  "period": {
+    "start": "2024-01-01",
+    "end": "2025-12-31"
+  },
+  "weights": {
+    "completeness": 0.4,
+    "uniqueness": 0.2,
+    "referential_integrity": 0.2,
+    "validity": 0.2
+  },
+  "overall_quality_score": 0.9516550673857974,
+  "table_metrics": {
+    "customers": {
+      "rows_raw": 20200,
+      "rows_cleaned": 20200,
+      "completeness": 0.9846287128712872,
+      "uniqueness": 1.0,
+      "referential_integrity": 1,
+      "validity": 1,
+      "quality_score": 0.9938514851485147
+    },
+    "products": {
+      "rows_raw": 100,
+      "rows_cleaned": 100,
+      "completeness": 0.985,
+      "uniqueness": 1.0,
+      "referential_integrity": 1,
+      "validity": 1.0,
+      "quality_score": 0.994
+    },
+    "stores": {
+      "rows_raw": 22,
+      "rows_cleaned": 22,
+      "completeness": 1.0,
+      "uniqueness": 1.0,
+      "referential_integrity": 1,
+      "validity": 1,
+      "quality_score": 1.0
+    },
+    "orders": {
+      "rows_raw": 150000,
+      "rows_cleaned": 149256,
+      "completeness": 0.6665002858623216,
+      "uniqueness": 1.0,
+      "referential_integrity": 1.0,
+      "validity": 0.9990017151739293,
+      "quality_score": 0.8664004573797146
+    },
+    "order_items": {
+      "rows_raw": 284367,
+      "rows_cleaned": 284367,
+      "completeness": 0.855862821133053,
+      "uniqueness": 1,
+      "referential_integrity": 1.0,
+      "validity": 1.0,
+      "quality_score": 0.9423451284532212
+    },
+    "sales_targets": {
+      "rows_raw": 490,
+      "rows_cleaned": 24,
+      "completeness": 0.7833333333333333,
+      "uniqueness": 1.0,
+      "referential_integrity": 1.0,
+      "validity": 1.0,
+      "quality_score": 0.9133333333333333
+    }
+  }
+}

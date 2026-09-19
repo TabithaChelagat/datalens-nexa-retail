@@ -1,0 +1,101 @@
+product_id,product_name,category,subcategory,unit_cost,selling_price
+PR001,Power Bank A1,Electronics,Computers,4508.52,6626.42
+PR002,Laptop B1,Electronics,Computers,45983.71,61849.79
+PR003,Power Bank C1,Electronics,Mobile Phones,2758.71,3307.62
+PR004,Mobile Phone D1,Electronics,Audio,24866.46,32547.12
+PR005,Keyboard E1,Electronics,Computers,3620.96,4448.22
+PR006,Laptop F1,Electronics,Accessories,49582.61,75613.17
+PR007,Keyboard G1,Electronics,Accessories,1969.04,2625.08
+PR008,Mobile Phone H1,Electronics,Computers,47773.59,58606.62
+PR009,Power Bank I1,Electronics,Audio,,5520.68
+PR010,Laptop J1,Electronics,Audio,83034.58,106025.42
+PR011,Bluetooth Speaker K1,Electronics,Computers,4874.06,7684.18
+PR012,Wireless Earbuds L1,Electronics,Audio,8442.59,11515.65
+PR013,Keyboard M1,Electronics,Computers,4604.53,7410.7
+PR014,Wireless Earbuds N1,Electronics,Accessories,6115.96,9151.76
+PR015,Bluetooth Speaker O1,Electronics,Mobile Phones,2853.53,3960.57
+PR016,Wireless Earbuds P1,Electronics,Mobile Phones,8997.88,11966.16
+PR017,Power Bank Q1,Electronics,Computers,6013.53,6981.97
+PR018,Bluetooth Speaker R1,Electronics,Computers,,10167.67
+PR019,Keyboard S1,Electronics,Mobile Phones,1429.93,2185.28
+PR020,Power Bank T1,Electronics,Audio,1552.18,2169.61
+PR021,Bedsheet Set U1,Home,Home Decor,4865.88,6805.22
+PR022,Cookware Set V1,Home,Home Decor,6294.33,7867.78
+PR023,Microwave W1,Home,Appliances,23609.84,29307.68
+PR024,Microwave X1,Home,Kitchen,20284.86,27671.71
+PR025,Cookware Set Y1,Home,Appliances,4149.7,4839.26
+PR026,Table Lamp Z1,Home,Kitchen,3939.16,4597.89
+PR027,Office Chair A2,Home,Furniture,13428.11,21112.07
+PR028,Table Lamp B2,Home,Appliances,4240.57,5563.55
+PR029,Microwave C2,Home,Kitchen,21426.25,25581.8
+PR030,Table Lamp D2,Home,Appliances,3336.56,5280.46
+PR031,Bedsheet Set E2,Home,Kitchen,1341.98,2141.02
+PR032,Office Chair F2,Home,Furniture,10359.01,13429.73
+PR033,Cookware Set G2,Home,Kitchen,4308.84,6928.22
+PR034,Table Lamp H2,Home,Kitchen,2501.52,3065.63
+PR035,Office Chair I2,Home,Furniture,,27070.51
+PR036,Blender J2,Home,Kitchen,3925.77,5860.27
+PR037,Microwave K2,Home,Appliances,6960.81,8875.13
+PR038,Blender L2,Home,Appliances,3965.04,5953.77
+PR039,Cookware Set M2,Home,Appliances,4125.22,4822.11
+PR040,Blender N2,Home,Appliances,9505.29,11523.61
+PR041,Handbag O2,Fashion,Womenswear,3195.3,4541.55
+PR042,Shirt P2,Fashion,Menswear,3176.04,4603.43
+PR043,Sneakers Q2,Fashion,Accessories,4984.33,6825.38
+PR044,Jeans R2,Fashion,Womenswear,2119.54,3326.1
+PR045,Dress S2,Fashion,Footwear,,1976.13
+PR046,Jeans T2,Fashion,Menswear,5051.09,7651.74
+PR047,Jeans U2,Fashion,Menswear,6316.92,8489.61
+PR048,Sneakers V2,Fashion,,2005.33,3206.1
+PR049,Jeans W2,Fashion,Menswear,4634.38,6749.11
+PR050,Jeans X2,Fashion,Footwear,5193.18,6337.78
+PR051,Handbag Y2,Fashion,Footwear,7457.84,9743.37
+PR052,Belt Z2,Fashion,Menswear,1895.08,2770.66
+PR053,Shirt A3,Fashion,Accessories,1841.33,2510.65
+PR054,Handbag B3,Fashion,Accessories,5356.58,7236.55
+PR055,Handbag C3,Fashion,Footwear,4109.91,5741.57
+PR056,Shirt D3,Fashion,Menswear,3535.62,4404.48
+PR057,Dress E3,Fashion,Menswear,5835.62,7406.78
+PR058,Handbag F3,Fashion,Womenswear,6229.11,9964.63
+PR059,Handbag G3,Fashion,Footwear,3550.88,4995.0
+PR060,Belt H3,Fashion,Womenswear,2021.97,2630.77
+PR061,Face Moisturizer I3,Beauty,Fragrance,1131.18,1297.24
+PR062,Body Lotion J3,Beauty,Skincare,931.24,1357.28
+PR063,Sunscreen K3,Beauty,Fragrance,681.73,1029.16
+PR064,Shampoo L3,Beauty,Fragrance,1496.55,1739.59
+PR065,Body Lotion M3,Beauty,Personal Care,1136.09,1554.95
+PR066,Perfume N3,Beauty,Skincare,7209.94,9938.73
+PR067,Body Lotion O3,Beauty,Skincare,2451.08,2787.51
+PR068,Hair Oil P3,Beauty,Fragrance,739.5,1179.52
+PR069,Hair Oil Q3,Beauty,Personal Care,1061.14,1655.7
+PR070,Perfume R3,Beauty,,7147.44,9904.35
+PR071,Hair Oil S3,Beauty,Haircare,1001.71,1142.52
+PR072,Shampoo T3,Beauty,Personal Care,857.23,1287.56
+PR073,Sunscreen U3,Beauty,Haircare,1620.71,2321.61
+PR074,Shampoo V3,Beauty,Fragrance,719.11,829.99
+PR075,Face Moisturizer W3,Beauty,Personal Care,2516.03,2966.31
+PR076,Body Lotion X3,Beauty,Fragrance,1477.71,1896.59
+PR077,Sunscreen Y3,Beauty,Fragrance,1813.12,2248.86
+PR078,Perfume Z3,Beauty,Fragrance,6696.92,8205.53
+PR079,Sunscreen A4,Beauty,Fragrance,2242.95,3132.45
+PR080,Face Moisturizer B4,Beauty,Skincare,2528.11,3197.1
+PR081,Tea C4,Grocery,Household,578.03,919.16
+PR082,Biscuits D4,Grocery,Pantry,292.92,389.12
+PR083,Coffee E4,Grocery,,257.58,375.99
+PR084,Tea F4,Grocery,,204.79,305.63
+PR085,Cereal G4,Grocery,Snacks,716.98,1000.22
+PR086,Cereal H4,Grocery,,265.88,349.71
+PR087,Coffee I4,Grocery,Household,980.12,1367.16
+PR088,Coffee J4,Grocery,Beverages,616.84,932.76
+PR089,Biscuits K4,Grocery,Snacks,343.54,451.08
+PR090,Cooking Oil L4,Grocery,Snacks,307.46,391.07
+PR091,Coffee M4,Grocery,Beverages,1059.05,1602.32
+PR092,Cleaning Liquid N4,Grocery,Beverages,365.31,416.89
+PR093,Coffee O4,Grocery,Snacks,571.18,725.09
+PR094,Tea P4,Grocery,Beverages,899.35,1026.9
+PR095,Cooking Oil Q4,Grocery,Snacks,818.99,1251.32
+PR096,Biscuits R4,Grocery,Pantry,96.76,146.92
+PR097,Coffee S4,Grocery,Pantry,255.02,392.56
+PR098,Biscuits T4,Grocery,Household,516.83,676.42
+PR099,Cereal U4,Grocery,Pantry,258.4,394.01
+PR100,Cooking Oil V4,Grocery,Snacks,449.8,676.98
