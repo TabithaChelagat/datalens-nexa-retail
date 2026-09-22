@@ -1,0 +1,632 @@
+{
+  "name": "Nexa Retail",
+  "period": "2024-01-01 to 2025-12-31",
+  "status": "Demo loaded successfully",
+  "source": "data/reference/*.csv (validated reference layer)",
+  "methodology": "The demo uses the validated reference CSVs because the previously generated cleaned order files contain invalidated identifier fields. Cancelled and Returned orders are excluded. Net revenue = quantity \u00d7 unit price \u00d7 (1 \u2212 discount); gross profit = net revenue \u2212 quantity \u00d7 unit cost.",
+  "kpis": {
+    "revenue": 3678066052.41,
+    "gross_profit": 728312504.1,
+    "orders": 136665,
+    "customers": 18115,
+    "units": 468663.0,
+    "average_order_value": 26913.01,
+    "gross_margin_pct": 0.198015,
+    "line_items": 259034
+  },
+  "monthly": [
+    {
+      "month": "2024-01",
+      "revenue": 138074057.32,
+      "gross_profit": 26800082.1,
+      "orders": 5035,
+      "units": 17565.0,
+      "gross_margin_pct": 0.19,
+      "average_order_value": 27422.85
+    },
+    {
+      "month": "2024-02",
+      "revenue": 126469828.62,
+      "gross_profit": 24634529.12,
+      "orders": 4735,
+      "units": 16041.0,
+      "gross_margin_pct": 0.19,
+      "average_order_value": 26709.57
+    },
+    {
+      "month": "2024-03",
+      "revenue": 153515039.93,
+      "gross_profit": 30145206.72,
+      "orders": 5464,
+      "units": 19391.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 28095.72
+    },
+    {
+      "month": "2024-04",
+      "revenue": 142332648.45,
+      "gross_profit": 28096651.01,
+      "orders": 5258,
+      "units": 18006.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 27069.73
+    },
+    {
+      "month": "2024-05",
+      "revenue": 159559443.07,
+      "gross_profit": 31604164.97,
+      "orders": 5757,
+      "units": 19796.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 27715.73
+    },
+    {
+      "month": "2024-06",
+      "revenue": 147003387.44,
+      "gross_profit": 29324769.59,
+      "orders": 5438,
+      "units": 18773.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 27032.62
+    },
+    {
+      "month": "2024-07",
+      "revenue": 151398037.64,
+      "gross_profit": 30423365.7,
+      "orders": 5701,
+      "units": 19677.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26556.4
+    },
+    {
+      "month": "2024-08",
+      "revenue": 153473358.4,
+      "gross_profit": 30158698.08,
+      "orders": 5778,
+      "units": 19610.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26561.68
+    },
+    {
+      "month": "2024-09",
+      "revenue": 147439142.28,
+      "gross_profit": 29245899.82,
+      "orders": 5484,
+      "units": 18957.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26885.33
+    },
+    {
+      "month": "2024-10",
+      "revenue": 166901913.84,
+      "gross_profit": 32836165.1,
+      "orders": 6013,
+      "units": 20465.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 27756.85
+    },
+    {
+      "month": "2024-11",
+      "revenue": 174005951.49,
+      "gross_profit": 34665868.66,
+      "orders": 6294,
+      "units": 21913.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 27646.32
+    },
+    {
+      "month": "2024-12",
+      "revenue": 193604672.56,
+      "gross_profit": 38275617.97,
+      "orders": 7314,
+      "units": 25187.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26470.42
+    },
+    {
+      "month": "2025-01",
+      "revenue": 127023451.81,
+      "gross_profit": 24870817.32,
+      "orders": 4908,
+      "units": 16512.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 25880.9
+    },
+    {
+      "month": "2025-02",
+      "revenue": 127076934.27,
+      "gross_profit": 25157918.96,
+      "orders": 4677,
+      "units": 15744.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 27170.61
+    },
+    {
+      "month": "2025-03",
+      "revenue": 147321486.22,
+      "gross_profit": 29214804.37,
+      "orders": 5518,
+      "units": 18800.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26698.35
+    },
+    {
+      "month": "2025-04",
+      "revenue": 135946022.77,
+      "gross_profit": 26885255.26,
+      "orders": 5375,
+      "units": 18255.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 25292.28
+    },
+    {
+      "month": "2025-05",
+      "revenue": 155945383.68,
+      "gross_profit": 31624976.67,
+      "orders": 5813,
+      "units": 19792.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26827.01
+    },
+    {
+      "month": "2025-06",
+      "revenue": 140768064.86,
+      "gross_profit": 28326579.74,
+      "orders": 5395,
+      "units": 18537.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26092.32
+    },
+    {
+      "month": "2025-07",
+      "revenue": 153598318.89,
+      "gross_profit": 30581834.72,
+      "orders": 5696,
+      "units": 19494.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26966.0
+    },
+    {
+      "month": "2025-08",
+      "revenue": 155691168.45,
+      "gross_profit": 31295054.47,
+      "orders": 5892,
+      "units": 20267.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26424.16
+    },
+    {
+      "month": "2025-09",
+      "revenue": 144750612.34,
+      "gross_profit": 28208795.42,
+      "orders": 5392,
+      "units": 18373.0,
+      "gross_margin_pct": 0.19,
+      "average_order_value": 26845.44
+    },
+    {
+      "month": "2025-10",
+      "revenue": 166389455.98,
+      "gross_profit": 32433177.47,
+      "orders": 5953,
+      "units": 20474.0,
+      "gross_margin_pct": 0.19,
+      "average_order_value": 27950.52
+    },
+    {
+      "month": "2025-11",
+      "revenue": 174398724.14,
+      "gross_profit": 34857183.05,
+      "orders": 6471,
+      "units": 22023.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26950.82
+    },
+    {
+      "month": "2025-12",
+      "revenue": 195378947.98,
+      "gross_profit": 38645087.83,
+      "orders": 7304,
+      "units": 25011.0,
+      "gross_margin_pct": 0.2,
+      "average_order_value": 26749.58
+    }
+  ],
+  "stores": [
+    {
+      "store_id": "ST001",
+      "store_name": "Nexa Nairobi 1",
+      "region": "Nairobi",
+      "city": "Nairobi",
+      "revenue": 260478665.74,
+      "gross_profit": 50883170.29,
+      "orders": 9620,
+      "units": 33360.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST002",
+      "store_name": "Nexa Nairobi 2",
+      "region": "Nairobi",
+      "city": "Nairobi",
+      "revenue": 245216096.17,
+      "gross_profit": 48636745.29,
+      "orders": 9098,
+      "units": 31129.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST003",
+      "store_name": "Nexa Nairobi 3",
+      "region": "Nairobi",
+      "city": "Nairobi",
+      "revenue": 215024962.38,
+      "gross_profit": 42731905.09,
+      "orders": 8091,
+      "units": 27298.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST004",
+      "store_name": "Nexa Nairobi 4",
+      "region": "Nairobi",
+      "city": "Nairobi",
+      "revenue": 210913592.33,
+      "gross_profit": 42031073.79,
+      "orders": 7552,
+      "units": 26054.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST008",
+      "store_name": "Nexa Mombasa 8",
+      "region": "Coast",
+      "city": "Mombasa",
+      "revenue": 210235509.63,
+      "gross_profit": 41177914.95,
+      "orders": 7908,
+      "units": 26598.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST015",
+      "store_name": "Nexa Nakuru 15",
+      "region": "Rift Valley",
+      "city": "Nakuru",
+      "revenue": 203862285.99,
+      "gross_profit": 40121458.18,
+      "orders": 7593,
+      "units": 26039.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST017",
+      "store_name": "Nexa Eldoret 17",
+      "region": "Rift Valley",
+      "city": "Eldoret",
+      "revenue": 197623548.98,
+      "gross_profit": 39164128.91,
+      "orders": 7088,
+      "units": 24113.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST011",
+      "store_name": "Nexa Kisumu 11",
+      "region": "Western",
+      "city": "Kisumu",
+      "revenue": 191959150.68,
+      "gross_profit": 38310534.53,
+      "orders": 7110,
+      "units": 24568.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST005",
+      "store_name": "Nexa Thika 5",
+      "region": "Central",
+      "city": "Thika",
+      "revenue": 187015366.53,
+      "gross_profit": 37333553.02,
+      "orders": 6766,
+      "units": 23064.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST009",
+      "store_name": "Nexa Mombasa 9",
+      "region": "Coast",
+      "city": "Mombasa",
+      "revenue": 183613700.22,
+      "gross_profit": 36610492.96,
+      "orders": 6986,
+      "units": 23899.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST016",
+      "store_name": "Nexa Nakuru 16",
+      "region": "Rift Valley",
+      "city": "Nakuru",
+      "revenue": 179136661.01,
+      "gross_profit": 35291272.5,
+      "orders": 6673,
+      "units": 22829.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST012",
+      "store_name": "Nexa Kisumu 12",
+      "region": "Western",
+      "city": "Kisumu",
+      "revenue": 178212867.5,
+      "gross_profit": 34507354.01,
+      "orders": 6661,
+      "units": 22882.0,
+      "gross_margin_pct": 0.19
+    },
+    {
+      "store_id": "ST006",
+      "store_name": "Nexa Nyeri 6",
+      "region": "Central",
+      "city": "Nyeri",
+      "revenue": 171492503.56,
+      "gross_profit": 34046784.91,
+      "orders": 6327,
+      "units": 21810.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST018",
+      "store_name": "Nexa Eldoret 18",
+      "region": "Rift Valley",
+      "city": "Eldoret",
+      "revenue": 162569966.59,
+      "gross_profit": 32461232.7,
+      "orders": 6213,
+      "units": 21187.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST013",
+      "store_name": "Nexa Kakamega 13",
+      "region": "Western",
+      "city": "Kakamega",
+      "revenue": 155429567.16,
+      "gross_profit": 30981633.09,
+      "orders": 5633,
+      "units": 19515.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST007",
+      "store_name": "Nexa Machakos 7",
+      "region": "Eastern",
+      "city": "Machakos",
+      "revenue": 154037521.48,
+      "gross_profit": 30608551.2,
+      "orders": 5780,
+      "units": 19973.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST014",
+      "store_name": "Nexa Kitale 14",
+      "region": "Western",
+      "city": "Kitale",
+      "revenue": 149554919.76,
+      "gross_profit": 29665438.1,
+      "orders": 5685,
+      "units": 19591.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST019",
+      "store_name": "Nexa Naivasha 19",
+      "region": "Rift Valley",
+      "city": "Naivasha",
+      "revenue": 146309594.54,
+      "gross_profit": 29209596.66,
+      "orders": 5484,
+      "units": 18779.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST020",
+      "store_name": "Nexa Nyeri 20",
+      "region": "Central",
+      "city": "Nyeri",
+      "revenue": 137803533.52,
+      "gross_profit": 27694236.59,
+      "orders": 5210,
+      "units": 17828.0,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "store_id": "ST010",
+      "store_name": "Nexa Malindi 10",
+      "region": "Coast",
+      "city": "Malindi",
+      "revenue": 137576038.63,
+      "gross_profit": 26845427.31,
+      "orders": 5187,
+      "units": 18147.0,
+      "gross_margin_pct": 0.2
+    }
+  ],
+  "categories": [
+    {
+      "category": "Electronics",
+      "revenue": 1864858591.34,
+      "gross_profit": 375806680.67,
+      "units": 93456.0,
+      "orders": 44724,
+      "gross_margin_pct": 0.2
+    },
+    {
+      "category": "Home",
+      "revenue": 996298530.49,
+      "gross_profit": 175512560.25,
+      "units": 93267.0,
+      "orders": 44747,
+      "gross_margin_pct": 0.18
+    },
+    {
+      "category": "Fashion",
+      "revenue": 492579947.02,
+      "gross_profit": 113586094.57,
+      "units": 94333.0,
+      "orders": 44861,
+      "gross_margin_pct": 0.23
+    },
+    {
+      "category": "Beauty",
+      "revenue": 263761159.97,
+      "gross_profit": 49109429.74,
+      "units": 93565.0,
+      "orders": 44578,
+      "gross_margin_pct": 0.19
+    },
+    {
+      "category": "Grocery",
+      "revenue": 60567823.59,
+      "gross_profit": 14297738.87,
+      "units": 94042.0,
+      "orders": 44757,
+      "gross_margin_pct": 0.24
+    }
+  ],
+  "top_products": [
+    {
+      "product_id": "PR010",
+      "product_name": "Laptop J1",
+      "category": "Electronics",
+      "revenue": 460473891.04,
+      "gross_profit": 75193439.84,
+      "units": 4640.0,
+      "orders": 2547
+    },
+    {
+      "product_id": "PR006",
+      "product_name": "Laptop F1",
+      "category": "Electronics",
+      "revenue": 316066450.55,
+      "gross_profit": 94531349.07,
+      "units": 4468.0,
+      "orders": 2527
+    },
+    {
+      "product_id": "PR002",
+      "product_name": "Laptop B1",
+      "category": "Electronics",
+      "revenue": 265309191.26,
+      "gross_profit": 54795766.88,
+      "units": 4578.0,
+      "orders": 2509
+    },
+    {
+      "product_id": "PR008",
+      "product_name": "Mobile Phone H1",
+      "category": "Electronics",
+      "revenue": 258128759.58,
+      "gross_profit": 33401792.22,
+      "units": 4704.0,
+      "orders": 2590
+    },
+    {
+      "product_id": "PR004",
+      "product_name": "Mobile Phone D1",
+      "category": "Electronics",
+      "revenue": 146804854.54,
+      "gross_profit": 26699852.74,
+      "units": 4830.0,
+      "orders": 2613
+    },
+    {
+      "product_id": "PR023",
+      "product_name": "Microwave W1",
+      "category": "Home",
+      "revenue": 129497481.3,
+      "gross_profit": 18224305.38,
+      "units": 4713.0,
+      "orders": 2529
+    },
+    {
+      "product_id": "PR035",
+      "product_name": "Office Chair I2",
+      "category": "Home",
+      "revenue": 123152892.92,
+      "gross_profit": 9115534.27,
+      "units": 4861.0,
+      "orders": 2652
+    },
+    {
+      "product_id": "PR024",
+      "product_name": "Microwave X1",
+      "category": "Home",
+      "revenue": 119547768.75,
+      "gross_profit": 26156273.31,
+      "units": 4604.0,
+      "orders": 2540
+    },
+    {
+      "product_id": "PR029",
+      "product_name": "Microwave C2",
+      "category": "Home",
+      "revenue": 107715756.16,
+      "gross_profit": 11169073.66,
+      "units": 4506.0,
+      "orders": 2485
+    },
+    {
+      "product_id": "PR027",
+      "product_name": "Office Chair A2",
+      "category": "Home",
+      "revenue": 91488956.66,
+      "gross_profit": 29209382.48,
+      "units": 4638.0,
+      "orders": 2578
+    }
+  ],
+  "quality_summary": [
+    {
+      "table": "customers",
+      "rows": 20000,
+      "missing_key_count": 0,
+      "duplicate_rows": 0,
+      "missing_cells": 0
+    },
+    {
+      "table": "products",
+      "rows": 100,
+      "missing_key_count": 0,
+      "duplicate_rows": 0,
+      "missing_cells": 0
+    },
+    {
+      "table": "stores",
+      "rows": 20,
+      "missing_key_count": 0,
+      "duplicate_rows": 0,
+      "missing_cells": 0
+    },
+    {
+      "table": "orders",
+      "rows": 150000,
+      "missing_key_count": 0,
+      "duplicate_rows": 0,
+      "missing_cells": 0
+    },
+    {
+      "table": "order_items",
+      "rows": 284367,
+      "missing_key_count": 0,
+      "duplicate_rows": 0,
+      "missing_cells": 0
+    }
+  ],
+  "notes": [
+    "This is a reproducible demo snapshot generated from the repository reference data.",
+    "The upload/profile workflow is intentionally not part of this demo milestone."
+  ]
+}

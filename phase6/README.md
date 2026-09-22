@@ -1,18 +1,23 @@
-# DataLens Phase 6 — Vercel Web App
+# DataLens Phase 6 — Nexa Retail Demo
 
-This phase adds a Vercel-compatible web interface with:
+This deployment provides a dataset-backed, reproducible Nexa Retail analytics demo.
 
-- **Demo mode:** displays the Nexa Retail demo status.
-- **Upload mode:** accepts CSV/XLSX/XLS files and generates an isolated profile.
-- **No data mixing:** uploads are processed per request and are not inserted into the demo database.
+## Current milestone
 
-## Deploy
+- Loads a precomputed demo snapshot from `demo_data.json`.
+- Displays revenue, gross profit, orders, customers, units, average order value, and gross margin.
+- Displays monthly performance, category revenue, store performance, top products, and a data-quality summary.
+- Shows methodology and data provenance.
+- Keeps upload profiling as a separate experimental feature.
 
-1. Put the contents of this project in your GitHub repository.
-2. In Vercel, choose **Add New → Project** and import the repository.
-3. Set the **Root Directory** to `phase6` if this folder is nested in the repository.
-4. Deploy. Vercel will detect `vercel.json` and install `requirements.txt`.
+## Deployment
 
-## Important scope
+In Vercel, set the project Root Directory to `phase6`, then deploy.
 
-This is the first deployable vertical slice. It validates the web deployment and upload/profile workflow. The next iteration will connect the demo mode to hosted PostgreSQL and add the governed natural-language KPI agent.
+## Data note
+
+The demo snapshot is generated from the repository's `data/reference/*.csv` validated reference layer. This is intentional because the earlier generated cleaned order files contain invalidated identifier fields. The snapshot's methodology and source are displayed in the application.
+
+## Scope
+
+This milestone does not yet include hosted PostgreSQL or a natural-language KPI agent. Those are subsequent development stages.
