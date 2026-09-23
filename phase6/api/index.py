@@ -3,8 +3,8 @@ from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[1]
-RAW = ROOT / 'public' / 'data' / 'raw'
+API_ROOT = Path(__file__).resolve().parent
+RAW = API_ROOT / 'data' / 'raw'
 MAX_ROWS = 100
 SUPPORTED = {'.csv'}
 
