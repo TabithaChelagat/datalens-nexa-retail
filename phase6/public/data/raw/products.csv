@@ -1,0 +1,121 @@
+product_id,product_name,category,unit_price,unit_cost
+P0001,Product 001,Home & Kitchen,267.43,170.77
+P0002,Product 002,Fashion,264.78,241.93
+P0003,Product 003,Electronics,445.88,44.6
+P0004,Product 004,Beauty,342.47,175.89
+P0005,Product 005,Grocery,,153.63
+P0006,Product 006,Beauty,320.67,46.65
+P0007,Product 007,Fashion,180.04,188.7
+P0008,Product 008,Grocery,109.16,85.0
+P0009,Product 009,Beauty,271.81,148.4
+P0010,Product 010,Fashion,418.26,28.35
+P0011,Product 011,Electronics,418.68,140.04
+P0012,Product 012,Fashion,159.12,94.71
+P0013,Product 013,Grocery,241.23,247.42
+P0014,Product 014,Home & Kitchen,101.54,20.87
+P0015,Product 015,Electronics,448.07,127.91
+P0016,Product 016,Beauty,441.65,139.7
+P0017,Product 017,Grocery,295.08,218.6
+P0018,Product 018,Home & Kitchen,363.55,173.99
+P0019,Product 019,Fashion,-10.0,201.49
+P0020,Product 020,Home & Kitchen,270.18,234.01
+P0021,Product 021,Grocery,31.58,259.21
+P0022,Product 022,Grocery,209.01,96.91
+P0023,Product 023,Home & Kitchen,306.26,163.25
+P0024,Product 024,Fashion,307.47,252.67
+P0025,Product 025,Home & Kitchen,172.92,296.88
+P0026,Product 026,Grocery,424.23,267.3
+P0027,Product 027,Grocery,81.97,113.95
+P0028,Product 028,Beauty,229.16,61.77
+P0029,Product 029,Beauty,313.37,148.86
+P0030,Product 030,Electronics,316.13,223.53
+P0031,Product 031,electronics,294.7,149.8
+P0032,Product 032,Beauty,129.68,147.02
+P0033,Product 033,Home & Kitchen,77.04,252.12
+P0034,Product 034,Fashion,289.09,110.98
+P0035,Product 035,Home & Kitchen,272.89,258.5
+P0036,Product 036,Fashion,87.28,124.41
+P0037,Product 037,Beauty,319.67,101.16
+P0038,Product 038,Electronics,209.19,138.38
+P0039,Product 039,Home & Kitchen,303.15,229.68
+P0040,Product 040,Home & Kitchen,378.12,41.3
+P0041,Product 041,Home & Kitchen,83.02,62.14
+P0042,Product 042,Fashion,16.46,285.63
+P0043,Product 043,Beauty,352.36,55.95
+P0044,Product 044,Home & Kitchen,277.49,172.05
+P0045,Product 045,Home & Kitchen,317.24,175.48
+P0046,Product 046,Electronics,378.46,148.93
+P0047,Product 047,Electronics,362.84,194.84
+P0048,Product 048,Beauty,432.73,72.03
+P0049,Product 049,Beauty,244.88,167.59
+P0050,Product 050,Grocery,223.92,114.16
+P0051,Product 051,Electronics,185.63,199.85
+P0052,Product 052,Grocery,75.93,45.8
+P0053,Product 053,Fashion,261.09,172.98
+P0054,Product 054,Grocery,130.44,58.84
+P0055,Product 055,Home & Kitchen,415.22,86.48
+P0056,Product 056,Grocery,265.77,68.74
+P0057,Product 057,Beauty,270.04,58.12
+P0058,Product 058,Fashion,164.88,248.41
+P0059,Product 059,Home & Kitchen,30.98,88.57
+P0060,Product 060,Grocery,22.03,278.43
+P0061,Product 061,Fashion,195.11,291.1
+P0062,Product 062,Fashion,45.38,173.09
+P0063,Product 063,Home & Kitchen,276.23,46.33
+P0064,Product 064,Grocery,397.39,114.87
+P0065,Product 065,Fashion,398.25,240.13
+P0066,Product 066,Fashion,299.3,112.75
+P0067,Product 067,Electronics,101.36,29.76
+P0068,Product 068,Fashion,389.44,168.81
+P0069,Product 069,Electronics,399.65,254.16
+P0070,Product 070,Grocery,94.92,239.59
+P0071,Product 071,Grocery,333.94,55.84
+P0072,Product 072,Grocery,134.64,203.14
+P0073,Product 073,Beauty,362.77,69.27
+P0074,Product 074,Grocery,448.78,68.59
+P0075,Product 075,Fashion,21.27,262.73
+P0076,Product 076,Home & Kitchen,404.64,77.9
+P0077,Product 077,Electronics,283.2,81.92
+P0078,Product 078,Beauty,438.24,4.19
+P0079,Product 079,Grocery,213.53,261.72
+P0080,Product 080,Grocery,382.55,238.61
+P0081,Product 081,Home & Kitchen,35.58,189.69
+P0082,Product 082,Home & Kitchen,156.19,226.08
+P0083,Product 083,Beauty,37.62,49.01
+P0084,Product 084,Electronics,439.1,139.66
+P0085,Product 085,Grocery,369.1,107.96
+P0086,Product 086,Beauty,384.83,31.76
+P0087,Product 087,Fashion,422.58,147.89
+P0088,Product 088,Fashion,45.62,276.54
+P0089,Product 089,Beauty,178.43,15.86
+P0090,Product 090,Grocery,39.4,90.27
+P0091,Product 091,Beauty,101.17,65.43
+P0092,Product 092,Grocery,109.38,74.49
+P0093,Product 093,Home & Kitchen,215.35,272.9
+P0094,Product 094,Beauty,126.7,142.55
+P0095,Product 095,Grocery,52.63,142.02
+P0096,Product 096,Beauty,82.03,229.13
+P0097,Product 097,Beauty,73.1,49.73
+P0098,Product 098,Grocery,438.1,148.23
+P0099,Product 099,Grocery,343.61,131.28
+P0100,Product 100,Electronics,435.75,180.69
+P0101,Product 101,Beauty,202.37,299.87
+P0102,Product 102,Fashion,131.04,231.76
+P0103,Product 103,Beauty,360.85,121.77
+P0104,Product 104,Beauty,152.2,248.96
+P0105,Product 105,Grocery,140.33,54.53
+P0106,Product 106,Beauty,110.77,13.02
+P0107,Product 107,Beauty,65.32,64.52
+P0108,Product 108,Fashion,121.36,104.76
+P0109,Product 109,Grocery,165.05,155.13
+P0110,Product 110,Beauty,305.91,186.08
+P0111,Product 111,Home & Kitchen,35.65,273.54
+P0112,Product 112,Electronics,101.04,154.92
+P0113,Product 113,Fashion,365.59,152.38
+P0114,Product 114,Beauty,72.94,18.87
+P0115,Product 115,Home & Kitchen,159.45,14.33
+P0116,Product 116,Beauty,390.18,167.14
+P0117,Product 117,Beauty,76.48,133.7
+P0118,Product 118,Grocery,44.57,252.4
+P0119,Product 119,Grocery,222.17,51.56
+P0120,Product 120,Grocery,141.67,11.39
