@@ -1,4 +1,4 @@
-# DataLens Phase 6 — Demo v2
+# DataLens Phase 6 — Demo v3
 
 Interactive Nexa Retail analytics workflow:
 
