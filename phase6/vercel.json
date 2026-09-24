@@ -1,1 +1,12 @@
-{"version":2,"builds":[{"src":"api/index.py","use":"@vercel/python"},{"src":"public/**","use":"@vercel/static"}],"routes":[{"src":"/api/(.*)","dest":"/api/index.py"},{"src":"/(.*)","dest":"/public/$1"},{"src":"/","dest":"/public/index.html"}],"functions":{"api/index.py":{"includeFiles":"api/data/raw/*.csv"}},"$schema":"https://openapi.vercel.sh/vercel.json"}
+{
+  "version": 2,
+  "builds": [
+    {"src": "api/index.py", "use": "@vercel/python", "config": {"includeFiles": "api/data/raw/**"}},
+    {"src": "public/**", "use": "@vercel/static"}
+  ],
+  "routes": [
+    {"src": "/api/(.*)", "dest": "/api/index.py"},
+    {"src": "/(.*)", "dest": "/public/$1"},
+    {"src": "/", "dest": "/public/index.html"}
+  ]
+}
