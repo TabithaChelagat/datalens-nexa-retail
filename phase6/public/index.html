@@ -1,21 +1,221 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DataLens — Nexa Retail</title><style>
-:root{font-family:Inter,system-ui,-apple-system,sans-serif;color:#17202a;background:#f6f8fb}body{margin:0}.wrap{max-width:1180px;margin:auto;padding:28px}.hero{background:#17202a;color:white;border-radius:20px;padding:32px;margin-bottom:22px}.hero h1{font-size:42px;margin:0 0 8px}.hero p{margin:0;color:#d9e1e8}.steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.step{padding:9px 12px;border:1px solid #56616b;border-radius:999px;font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.card{background:white;border:1px solid #dde3ea;border-radius:16px;padding:20px;box-shadow:0 2px 8px #0000000a}.wide{grid-column:1/-1}h2{margin-top:0}.muted{color:#66717d}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}button,select,input{font:inherit;padding:10px 12px;border:1px solid #cbd3dc;border-radius:9px;background:white}button{background:#17202a;color:white;border:0;cursor:pointer}button.secondary{background:#eef2f6;color:#17202a}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#eef2f6;margin:3px}.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.kpi{padding:14px;background:#f7f9fb;border-radius:12px}.kpi strong{display:block;font-size:20px;margin-top:5px}.tablewrap{overflow:auto;max-height:420px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:1px solid #e7ebef;text-align:left;padding:8px;white-space:nowrap}pre{white-space:pre-wrap;background:#f4f6f8;padding:12px;border-radius:10px;overflow:auto}.issue{border-left:4px solid #d47b00;padding:10px;margin:8px 0;background:#fff9ef}.chat{min-height:100px;background:#f7f9fb;padding:14px;border-radius:12px}.answer{white-space:pre-wrap}.small{font-size:12px}@media(max-width:850px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.kpis{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:32px}}
-</style></head><body><div class="wrap"><header class="hero"><h1>DataLens</h1><p>Your data. Your questions. Evidence-backed answers.</p><div class="steps"><span class="step">1 Explore</span><span class="step">2 Quality</span><span class="step">3 Clean</span><span class="step">4 Transform</span><span class="step">5 Analyze</span><span class="step">6 Ask</span></div></header>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DataLens — Nexa Retail</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,sans-serif;color:#17202a;background:#f6f8fb}
+body{margin:0}.wrap{max-width:1200px;margin:auto;padding:24px}
+.hero{background:#17202a;color:white;border-radius:20px;padding:30px;margin-bottom:20px}
+.hero h1{font-size:42px;margin:0 0 8px}.hero p{margin:0;color:#d9e1e8}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.step{padding:8px 11px;border:1px solid #56616b;border-radius:999px;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.card{background:white;border:1px solid #dde3ea;border-radius:16px;padding:20px;box-shadow:0 2px 8px #0000000a}.wide{grid-column:1/-1}
+h2{margin-top:0}.muted{color:#66717d}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button,select,input{font:inherit;padding:9px 11px;border:1px solid #cbd3dc;border-radius:9px;background:white}button{background:#17202a;color:white;border:0;cursor:pointer}button.secondary{background:#eef2f6;color:#17202a}
+button.smallbtn{padding:7px 9px;font-size:12px}.filetag{display:inline-block;background:#eef2f6;border-radius:999px;padding:4px 8px;font-size:12px;margin-left:6px}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.kpi{padding:13px;background:#f7f9fb;border-radius:12px}.kpi strong{display:block;font-size:20px;margin-top:5px}
+.tablewrap{overflow:auto;max-height:430px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:1px solid #e7ebef;text-align:left;padding:8px;white-space:nowrap}th{background:#f7f9fb;position:sticky;top:0}
+.issue{border-left:4px solid #d47b00;padding:10px;margin:8px 0;background:#fff9ef;border-radius:4px}.ok{border-left-color:#2f7d4b;background:#f1faf4}
+.chat{min-height:100px;background:#f7f9fb;padding:14px;border-radius:12px}.answer{white-space:pre-wrap}.small{font-size:12px}.sectionline{border-top:1px solid #e7ebef;margin:18px 0;padding-top:15px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}.chartbox{height:330px;margin:15px 0}.chartbox canvas{max-height:330px}
+.operation{border:1px solid #e1e6eb;border-radius:12px;padding:12px;margin:10px 0}.operation h4{margin:0 0 9px}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.warning{background:#fff7e8;border:1px solid #f0d7a2;border-radius:10px;padding:9px;margin:6px 0}
+.pill{display:inline-block;padding:7px 9px;border-radius:999px;background:#eef2f6;margin:3px;cursor:pointer}.pill:hover{background:#e1e7ed}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.kpis{grid-template-columns:repeat(2,1fr)}.compare{grid-template-columns:1fr}.statgrid{grid-template-columns:1fr}.hero h1{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<h1>DataLens</h1><p>Your data. Your questions. Evidence-backed answers.</p>
+<div class="steps"><span class="step">1 Explore</span><span class="step">2 Quality</span><span class="step">3 Clean</span><span class="step">4 Transform</span><span class="step">5 Analyze</span><span class="step">6 Ask</span></div>
+</header>
+
 <div class="grid">
-<section class="card wide"><h2>1. Explore the raw Nexa Retail data</h2><p class="muted">Start with the intentionally messy source files. Inspect the data before trusting the analysis.</p><div class="row"><select id="file"></select><button onclick="explore()">Explore CSV</button><button class="secondary" onclick="quality()">Check data quality</button></div><div id="exploreOut"></div></section>
-<section class="card"><h2>2. Data quality</h2><p class="muted">Issues are surfaced before cleaning or analytics.</p><div id="qualityOut"><span class="muted">Select a CSV and check its quality.</span></div></section>
-<section class="card"><h2>3. Clean</h2><p class="muted">Apply controlled cleaning operations to the selected dataset.</p><div class="row"><label><input id="dups" type="checkbox"> Remove duplicates</label><label><input id="agefix" type="checkbox"> Repair invalid ages</label></div><div id="fillOptions"></div><button onclick="clean()">Apply cleaning</button><div id="cleanOut"></div></section>
-<section class="card wide"><h2>4. Transform / engineer columns</h2><p class="muted">Create a new column from existing data without giving the model unrestricted access to the CSV.</p><div class="row"><select id="source"></select><select id="transformType"><option value="month">Month from date</option><option value="year">Year from date</option><option value="quarter">Quarter from date</option><option value="age_group">Age groups</option></select><input id="newcol" placeholder="New column name"><button onclick="transform()">Create column</button></div><div id="transformOut"></div></section>
-<section class="card wide"><h2>5. Analyze Nexa Retail</h2><p class="muted">Analytics use computed values from the governed demo layer.</p><button onclick="analytics()">Load analytics</button><div id="analyticsOut"></div></section>
-<section class="card wide"><h2>6. Ask DataLens</h2><p class="muted">Ask a business question. DataLens uses controlled analytical functions for factual answers rather than sending the raw CSV to the model.</p><div class="row"><input id="question" style="flex:1;min-width:240px" placeholder="e.g. What are our top 3 categories by revenue?"><button onclick="ask()">Ask DataLens</button></div><div class="pill" onclick="q('Which categories have the highest revenue?')">Top categories</div><div class="pill" onclick="q('What is our overall profit margin?')">Profit margin</div><div class="pill" onclick="q('Which products have the highest revenue?')">Top products</div><div class="pill" onclick="q('Are there any data-quality issues?')">Data quality</div><div id="askOut" class="chat" style="margin-top:14px"><span class="muted">Your evidence-backed answer will appear here.</span></div></section>
-</div></div><script>
-const $=id=>document.getElementById(id);const j=async(url,opt)=>{const r=await fetch(url,opt);const x=await r.json();if(!r.ok)throw Error(x.error||'Request failed');return x};
-async function init(){try{let x=await j('/api/files');if(!x.files.length)throw Error('No demo CSV files were found by the API.');$('file').innerHTML=x.files.map(f=>`<option>${f}</option>`).join('');setSource();}catch(e){$('file').innerHTML='<option value="">Demo datasets unavailable</option>';$('exploreOut').innerHTML=`<div class="issue"><b>Demo data could not be loaded.</b><br>${e.message}</div>`;$('qualityOut').innerHTML=`<div class="issue">${e.message}</div>`;}}function setSource(){let f=$('file').value;let opts={'customers.csv':['signup_date','age'],'orders.csv':['order_date'],'order_items.csv':[],'products.csv':[],'stores.csv':[]}[f]||[];$('source').innerHTML=opts.map(x=>`<option value="${x}">${x}</option>`).join('');$('newcol').value=opts.includes('order_date')?'order_month':opts.includes('signup_date')?'signup_month':'derived_column';}$('file').onchange=setSource;
-function table(rows){if(!rows||!rows.length)return '';let cols=Object.keys(rows[0]);return `<div class="tablewrap"><table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td>${r[c]??''}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
-async function explore(){let x=await j('/api/explore?file='+encodeURIComponent($('file').value));$('exploreOut').innerHTML=`<div class="kpis" style="margin:14px 0"><div class="kpi">Rows<strong>${x.rows}</strong></div><div class="kpi">Columns<strong>${x.columns}</strong></div><div class="kpi">Duplicates<strong>${x.duplicates}</strong></div><div class="kpi">Missing cells<strong>${x.missing_cells}</strong></div></div><h3>Column profile</h3>${table(x.column_profile)}<h3>Preview</h3>${table(x.preview)}`}
-async function quality(){let x=await j('/api/quality?file='+encodeURIComponent($('file').value));$('qualityOut').innerHTML=`<strong>${x.issue_count} issue types detected</strong>`+(x.issues.length?x.issues.map(i=>`<div class="issue"><b>${i.type}</b> — ${i.column}<br>${i.count} affected · ${i.severity}<br><span class="small">Suggested: ${i.suggested_action}</span></div>`).join(''):'<p>No issues detected.</p>');let opts=await j('/api/explore?file='+encodeURIComponent($('file').value));$('fillOptions').innerHTML=opts.column_profile.filter(c=>c.missing).map(c=>`<div class="row" style="margin:7px 0"><span style="min-width:120px">${c.column}</span><select data-fill="${c.column}"><option value="median">Median</option><option value="mean">Mean</option><option value="mode">Mode</option><option value="zero">0</option></select></div>`).join('')}
-async function clean(){let fills={};document.querySelectorAll('[data-fill]').forEach(s=>fills[s.dataset.fill]=s.value);let x=await j('/api/clean',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:$('file').value,operations:{drop_duplicates:$('dups').checked,fix_age:$('agefix').checked,fill_nulls:fills}})});$('cleanOut').innerHTML=`<p><b>Cleaning result</b></p>${x.log.map(l=>`<div class="pill">${l.action}: ${l.changed}</div>`).join('')}<p>Rows: ${x.before.rows} → ${x.after.rows} · Missing cells: ${x.before.missing_cells} → ${x.after.missing_cells}</p>${table(x.preview)}`}
-async function transform(){let type=$('transformType').value,source=$('source').value;let x=await j('/api/transform',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:$('file').value,spec:{type,source_column:source,new_column:$('newcol').value}})});$('transformOut').innerHTML=`<p><b>${x.new_column}</b> created from <b>${source}</b>. Columns: ${x.before_columns.length} → ${x.after_columns.length}</p>${table(x.preview)}`}
-async function analytics(){let x=await j('/api/analytics');let k=x.kpis;$('analyticsOut').innerHTML=`<div class="kpis" style="margin:14px 0">${[['Revenue',k.revenue.toFixed(2)],['Profit',k.profit.toFixed(2)],['Orders',k.orders],['Customers',k.customers],['AOV',k.aov.toFixed(2)],['Margin',(k.profit_margin*100).toFixed(1)+'%']].map(a=>`<div class="kpi">${a[0]}<strong>${a[1]}</strong></div>`).join('')}</div><h3>Monthly trend</h3>${table(x.monthly)}<h3>Stores</h3>${table(x.stores)}<h3>Categories</h3>${table(x.categories)}<h3>Top products</h3>${table(x.top_products)}`}
-function q(s){$('question').value=s;ask()}async function ask(){let question=$('question').value.trim();if(!question)return;$('askOut').textContent='Thinking with governed data tools…';try{let x=await j('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});$('askOut').innerHTML=`<div class="answer"><b>Answer</b><br>${x.answer}</div><hr><div class="small"><b>Evidence:</b> ${x.evidence||''}<br><b>Mode:</b> ${x.mode}</div>`}catch(e){$('askOut').textContent=e.message}}init();
-</script></body></html>
+<section class="card wide">
+<h2>1. Explore the raw Nexa Retail data <span class="filetag" id="exploreFile">No dataset selected</span></h2>
+<p class="muted">Inspect the source data before making cleaning or analytical decisions.</p>
+<div class="row"><select id="file"></select><button onclick="explore()">Explore Dataset</button></div>
+<div id="exploreOut"><span class="muted">Choose a CSV and explore it.</span></div>
+</section>
+
+<section class="card wide">
+<h2>2. Data Quality <span class="filetag" id="qualityFile">No dataset selected</span></h2>
+<p class="muted">Turn observations from exploration into explicit, detected data-quality findings.</p>
+<div class="row"><button onclick="quality()">Check Data Quality</button></div>
+<div id="qualityOut"><span class="muted">Choose a CSV, then run the quality check.</span></div>
+</section>
+
+<section class="card wide">
+<h2>3. Clean Your Data <span class="filetag" id="cleanFile">No dataset selected</span></h2>
+<p class="muted">Apply controlled operations to the selected dataset. The result shows what changed.</p>
+<div id="cleanControls"></div>
+<button onclick="clean()">Apply Cleaning</button>
+<div id="cleanOut"></div>
+</section>
+
+<section class="card wide">
+<h2>4. Transform Your Data <span class="filetag" id="transformFile">No dataset selected</span></h2>
+<p class="muted">Create a new column from columns already available in the selected dataset.</p>
+<div class="operation">
+<h4>Date transformations</h4>
+<div class="row"><select id="dateSource"></select><select id="dateType"><option value="year">Extract year</option><option value="month">Extract month</option><option value="quarter">Extract quarter</option><option value="day_of_week">Extract day of week</option></select><input id="dateNew" placeholder="New column name"><button onclick="transformDate()">Create column</button></div>
+</div>
+<div class="operation">
+<h4>Classification</h4>
+<div class="row"><select id="classSource"></select><select id="classType"><option value="age_group">Age → Age Group</option><option value="revenue_band">Revenue → Revenue Band</option><option value="tenure_group">Tenure → Tenure Group</option></select><input id="classNew" placeholder="New column name"><button onclick="transformClass()">Create column</button></div>
+</div>
+<div class="operation">
+<h4>Calculations</h4>
+<div class="row"><select id="calcA"></select><select id="calcOp"><option value="multiply">× Multiply</option><option value="subtract">− Subtract</option><option value="add">+ Add</option><option value="divide">÷ Divide</option></select><select id="calcB"></select><input id="calcNew" placeholder="New column name"><button onclick="transformCalc()">Create column</button></div>
+<p class="small muted">Examples: quantity × unit_price → sales; revenue − cost → profit; profit ÷ revenue → profit margin.</p>
+</div>
+<div id="transformOut"></div>
+</section>
+
+<section class="card wide">
+<h2>5. Analyze Nexa Retail</h2>
+<p class="muted">Analytics use computed values from the governed demo layer.</p>
+<button onclick="analytics()">Load Analytics</button><div id="analyticsOut"></div>
+</section>
+
+<section class="card wide">
+<h2>6. Ask DataLens</h2>
+<p class="muted">Ask a business question. DataLens uses controlled analytical functions for factual answers rather than sending raw CSVs to the model.</p>
+<div class="row"><input id="question" style="flex:1;min-width:240px" placeholder="e.g. Which stores are performing better?"><button onclick="ask()">Ask DataLens</button></div>
+<div style="margin-top:10px">
+<div class="pill" onclick="q('Which categories have the highest revenue?')">Top categories</div>
+<div class="pill" onclick="q('What is our overall profit margin?')">Profit margin</div>
+<div class="pill" onclick="q('Which products have the highest revenue?')">Top products</div>
+<div class="pill" onclick="q('Which stores are performing better?')">Store performance</div>
+<div class="pill" onclick="q('How many customers do we have?')">Customer count</div>
+<div class="pill" onclick="q('What is the monthly revenue trend?')">Monthly trend</div>
+<div class="pill" onclick="q('Are there any data-quality issues?')">Data quality</div>
+</div>
+<div id="askOut" class="chat" style="margin-top:14px"><span class="muted">Your evidence-backed answer will appear here.</span></div>
+</section>
+</div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const j=async(url,opt)=>{const r=await fetch(url,opt);const x=await r.json();if(!r.ok)throw Error(x.error||'Request failed');return x};
+let currentProfile=null, chartObjects={};
+
+function esc(v){return String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
+function table(rows){
+ if(!rows||!rows.length)return '<p class="muted">No rows to display.</p>';
+ const cols=Object.keys(rows[0]);
+ return `<div class="tablewrap"><table><thead><tr>${cols.map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td>${esc(r[c])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
+}
+function fileTags(){let f=$('file').value||'No dataset selected';['exploreFile','qualityFile','cleanFile','transformFile'].forEach(id=>$(id).textContent=f)}
+function fillSelect(id,arr,placeholder='Select column'){let el=$(id);el.innerHTML=arr.length?arr.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join(''):`<option value="">${placeholder}</option>`}
+function setControls(profile){
+ const cols=profile.column_profile.map(c=>c.column);
+ const dates=profile.column_profile.filter(c=>c.dtype.includes('date')||c.column.toLowerCase().includes('date')||c.column.toLowerCase().includes('signup')).map(c=>c.column);
+ const nums=profile.column_profile.filter(c=>['int','float','number'].some(x=>c.dtype.includes(x))).map(c=>c.column);
+ fillSelect('dateSource',dates,'No date column detected');fillSelect('classSource',cols,'Select source');
+ fillSelect('calcA',nums,'No numeric columns');fillSelect('calcB',nums,'No numeric columns');
+ const d=$('dateSource').value; $('dateNew').value=d?d+'_year':'new_column';
+ const c=$('classSource').value; $('classNew').value=c?(c==='age'?'age_group':c+'_group'):'new_column';
+ const a=$('calcA').value; const b=$('calcB').value; $('calcNew').value=(a&&b)?a+'_x_'+b:'calculated_value';
+ renderCleanControls(profile);
+}
+function renderCleanControls(p){
+ const missing=p.column_profile.filter(c=>c.missing);
+ let html='<div class="operation"><h4>Missing values</h4>';
+ if(!missing.length) html+='<p class="muted">No missing values detected in this dataset.</p>';
+ missing.forEach(c=>{
+   const numeric=['int','float','number'].some(x=>c.dtype.includes(x));
+   html+=`<div class="row" style="margin:8px 0"><b style="min-width:140px">${esc(c.column)}</b><span class="small">${c.missing} missing</span><select data-fill="${esc(c.column)}">`;
+   html+=numeric?'<option value="median">Median</option><option value="mean">Mean</option><option value="zero">0</option><option value="leave">Leave unchanged</option>':'<option value="mode">Mode</option><option value="custom">Custom value</option><option value="leave">Leave unchanged</option>';
+   html+='</select><input data-custom="'+esc(c.column)+'" placeholder="Custom value" style="display:none"></div>';
+ });
+ html+='</div><div class="operation"><h4>Other operations</h4>';
+ html+=`<div class="row"><label><input id="dups" type="checkbox"> Remove duplicate rows</label><label><input id="agefix" type="checkbox"> Handle invalid ages</label><label><input id="negfix" type="checkbox"> Handle negative values</label></div>`;
+ html+=`<p class="small muted">Selected-column operations</p><div class="row"><select id="dropColumn"><option value="">Select column to remove</option>${p.column_profile.map(c=>`<option>${esc(c.column)}</option>`).join('')}</select><button class="secondary smallbtn" onclick="addDrop()">Add column removal</button><span id="dropList"></span></div>`;
+ html+=`<div class="row" style="margin-top:8px"><select id="renameColumn"><option value="">Select column to rename</option>${p.column_profile.map(c=>`<option>${esc(c.column)}</option>`).join('')}</select><input id="renameTo" placeholder="New name"><button class="secondary smallbtn" onclick="addRename()">Add rename</button></div>`;
+ html+=`<div class="row" style="margin-top:8px"><select id="typeColumn"><option value="">Select column</option>${p.column_profile.map(c=>`<option>${esc(c.column)}</option>`).join('')}</select><select id="typeTo"><option value="number">Number</option><option value="integer">Integer</option><option value="text">Text</option><option value="date">Date</option></select><button class="secondary smallbtn" onclick="addType()">Add type change</button></div>`;
+ html+=`<div class="row" style="margin-top:8px"><select id="standardColumn"><option value="">Select text column</option>${p.column_profile.filter(c=>c.dtype.includes('object')||c.dtype.includes('string')).map(c=>`<option>${esc(c.column)}</option>`).join('')}</select><button class="secondary smallbtn" onclick="addStandard()">Standardize text</button></div></div>`;
+ $('cleanControls').innerHTML=html;
+ document.querySelectorAll('[data-fill]').forEach(s=>s.addEventListener('change',()=>{let i=document.querySelector(`[data-custom="${CSS.escape(s.dataset.fill)}"]`);if(i)i.style.display=s.value==='custom'?'inline-block':'none'}));
+ window.cleanOps={drop_columns:[],rename_columns:{},change_types:{},standardize_text:[]};
+}
+function addDrop(){let v=$('dropColumn').value;if(v&&!cleanOps.drop_columns.includes(v)){cleanOps.drop_columns.push(v);$('dropList').innerHTML=cleanOps.drop_columns.map(x=>`<span class="pill">${esc(x)} ×</span>`).join('')}}
+function addRename(){let v=$('renameColumn').value,n=$('renameTo').value.trim();if(v&&n){cleanOps.rename_columns[v]=n;$('renameTo').value='';}}
+function addType(){let v=$('typeColumn').value,t=$('typeTo').value;if(v)cleanOps.change_types[v]=t}
+function addStandard(){let v=$('standardColumn').value;if(v&&!cleanOps.standardize_text.includes(v))cleanOps.standardize_text.push(v)}
+
+async function init(){
+ try{let x=await j('/api/files');if(!x.files.length)throw Error('No demo CSV files were found by the API.');
+ $('file').innerHTML=x.files.map(f=>`<option>${esc(f)}</option>`).join('');fileTags();
+ }catch(e){$('file').innerHTML='<option value="">Demo datasets unavailable</option>';$('exploreOut').innerHTML=`<div class="issue"><b>Demo data could not be loaded.</b><br>${esc(e.message)}</div>`}
+}
+$('file').onchange=()=>{fileTags();currentProfile=null;$('exploreOut').innerHTML='';$('qualityOut').innerHTML='<span class="muted">Run the quality check for this dataset.</span>';$('cleanControls').innerHTML='<span class="muted">Explore the dataset first to load controlled cleaning options.</span>'; $('transformOut').innerHTML='';};
+async function explore(){
+ try{let x=await j('/api/explore?file='+encodeURIComponent($('file').value));currentProfile=x;fileTags();setControls(x);
+ let warn=x.warnings.length?x.warnings.map(w=>`<div class="warning"><b>${esc(w.type)}</b> — ${esc(w.column)} · ${w.count} affected<br><span class="small">${esc(w.message)}</span></div>`).join(''):'<div class="issue ok">No obvious quality warnings detected during exploration.</div>';
+ $('exploreOut').innerHTML=`<div class="kpis" style="margin:14px 0"><div class="kpi">Rows<strong>${x.rows.toLocaleString()}</strong></div><div class="kpi">Columns<strong>${x.columns}</strong></div><div class="kpi">Duplicates<strong>${x.duplicates.toLocaleString()}</strong></div><div class="kpi">Missing cells<strong>${x.missing_cells.toLocaleString()}</strong></div></div>
+ <h3>Column names & types</h3>${table(x.column_profile)}<h3>First 5 rows</h3>${table(x.preview)}
+ <h3>Basic numeric statistics</h3>${x.numeric_summary.length?table(x.numeric_summary):'<p class="muted">No numeric columns detected.</p>'}
+ <h3>Obvious quality warnings from exploration</h3>${warn}`;
+ }catch(e){$('exploreOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
+}
+async function quality(){
+ try{let x=await j('/api/quality?file='+encodeURIComponent($('file').value));fileTags();
+ $('qualityOut').innerHTML=`<p><b>${x.issue_count} issue type(s) detected</b></p>`+(x.issues.length?`<div class="tablewrap"><table><thead><tr><th>Issue</th><th>Column</th><th>Count</th><th>Action</th></tr></thead><tbody>${x.issues.map(i=>`<tr><td>${esc(i.type)}</td><td>${esc(i.column)}</td><td>${i.count}</td><td>${esc(i.suggested_action)}</td></tr>`).join('')}</tbody></table></div>`:'<div class="issue ok">No issues detected.</div>');
+ if(!currentProfile){currentProfile=await j('/api/explore?file='+encodeURIComponent($('file').value));setControls(currentProfile)}
+ }catch(e){$('qualityOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
+}
+async function clean(){
+ try{
+  let fills={};document.querySelectorAll('[data-fill]').forEach(s=>{if(s.value!=='leave')fills[s.dataset.fill]=s.value});
+  document.querySelectorAll('[data-custom]').forEach(i=>{let s=document.querySelector(`[data-fill="${CSS.escape(i.dataset.custom)}"]`);if(s&&s.value==='custom')fills[i.dataset.custom]='custom'});
+  let custom={};document.querySelectorAll('[data-custom]').forEach(i=>{if(i.value)custom[i.dataset.custom]=i.value});
+  let ops={...window.cleanOps,drop_duplicates:$('dups')?.checked||false,fix_age:$('agefix')?.checked||false,fix_negative:$('negfix')?.checked||false,fill_nulls:fills,custom_values:custom};
+  let x=await j('/api/clean',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:$('file').value,operations:ops})});
+  let actions=x.log.length?x.log.map(l=>`<tr><td>${esc(l.issue)}</td><td>${esc(l.column)}</td><td>${esc(l.action)}</td><td>${esc(l.before)}</td><td>${esc(l.after)}</td></tr>`).join(''):'<tr><td colspan="5">No changes were applied.</td></tr>';
+  $('cleanOut').innerHTML=`<div class="sectionline"><b>Cleaning result for ${esc(x.file)}</b></div>
+  <table><thead><tr><th>Issue</th><th>Column</th><th>Action</th><th>Before</th><th>After</th></tr></thead><tbody>${actions}</tbody></table>
+  <p><b>Dataset summary:</b> Rows ${x.before.rows.toLocaleString()} → ${x.after.rows.toLocaleString()} · Missing cells ${x.before.missing_cells.toLocaleString()} → ${x.after.missing_cells.toLocaleString()} · Duplicates ${x.before.duplicates} → ${x.after.duplicates}</p>
+  <div class="compare"><div><h4>Before — first 5 rows</h4>${table(x.preview_before)}</div><div><h4>After — first 5 rows</h4>${table(x.preview_after)}</div></div>`;
+ }catch(e){$('cleanOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
+}
+async function transformRequest(spec){
+ try{let x=await j('/api/transform',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:$('file').value,spec})});
+ $('transformOut').innerHTML=`<div class="sectionline"><b>Transformation result for ${esc(x.file)}</b></div><p><b>${esc(x.new_column)}</b> created. Columns: ${x.before_columns.length} → ${x.after_columns.length}</p><div class="compare"><div><h4>Before — first 5 rows</h4>${table(x.preview_before)}</div><div><h4>After — first 5 rows</h4>${table(x.preview_after)}</div></div>`;
+ }catch(e){$('transformOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
+}
+function transformDate(){transformRequest({type:$('dateType').value,source_column:$('dateSource').value,new_column:$('dateNew').value})}
+function transformClass(){transformRequest({type:$('classType').value,source_column:$('classSource').value,new_column:$('classNew').value})}
+function transformCalc(){transformRequest({type:'calculation',source_column:$('calcA').value,second_column:$('calcB').value,operator:$('calcOp').value,new_column:$('calcNew').value})}
+
+function renderChart(canvasId,cfg){
+ const old=chartObjects[canvasId];if(old)old.destroy();
+ chartObjects[canvasId]=new Chart($(canvasId),{type:cfg.type,data:{labels:cfg.labels,datasets:cfg.datasets.map(d=>({...d,borderWidth:2,tension:.25}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}});
+}
+async function analytics(){
+ try{let x=await j('/api/analytics'),k=x.kpis;
+ $('analyticsOut').innerHTML=`<div class="kpis" style="margin:14px 0">${[['Revenue',k.revenue.toFixed(2)],['Profit',k.profit.toFixed(2)],['Orders',k.orders.toLocaleString()],['Customers',k.customers.toLocaleString()],['AOV',k.aov.toFixed(2)],['Margin',(k.profit_margin*100).toFixed(1)+'%']].map(a=>`<div class="kpi">${a[0]}<strong>${a[1]}</strong></div>`).join('')}</div>
+ <h3>Monthly revenue and profit</h3><div class="chartbox"><canvas id="monthlyChart"></canvas></div>${table(x.monthly)}
+ <h3>Sales by store</h3><div class="chartbox"><canvas id="storeChart"></canvas></div>${table(x.stores)}
+ <h3>Sales by category</h3><div class="chartbox"><canvas id="catChart"></canvas></div>${table(x.categories)}
+ <h3>Top products</h3>${table(x.top_products)}`;
+ renderChart('monthlyChart',{type:'line',labels:x.monthly.map(r=>r.month),datasets:[{label:'Revenue',data:x.monthly.map(r=>r.revenue)},{label:'Profit',data:x.monthly.map(r=>r.profit)}]});
+ renderChart('storeChart',{type:'bar',labels:x.stores.map(r=>r.store_name||r.store_id),datasets:[{label:'Revenue',data:x.stores.map(r=>r.revenue)}]});
+ renderChart('catChart',{type:'bar',labels:x.categories.map(r=>r.category),datasets:[{label:'Revenue',data:x.categories.map(r=>r.revenue)}]});
+ }catch(e){$('analyticsOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
+}
+function q(s){$('question').value=s;ask()}
+async function ask(){
+ let question=$('question').value.trim();if(!question)return;$('askOut').innerHTML='<span class="muted">Computing from governed DataLens functions…</span>';
+ try{let x=await j('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});
+ let chart=x.chart?`<div class="chartbox"><canvas id="askChart"></canvas></div>`:'';
+ $('askOut').innerHTML=`<div class="answer"><b>Answer</b><br>${esc(x.answer)}</div>${chart}<hr><div class="small"><b>Evidence:</b> ${esc(x.evidence||'')} </div>`;
+ if(x.chart)renderChart('askChart',x.chart);
+ }catch(e){$('askOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
+}
+init();
+</script>
+</body></html>
