@@ -95,14 +95,9 @@ function table(rows){
 function fileTags(){let f=$('file').value||'No dataset selected';['exploreFile','qualityFile','cleanFile','transformFile'].forEach(id=>$(id).textContent=f)}
 function fillSelect(id,arr,placeholder='Select column'){let el=$(id);el.innerHTML=arr.length?arr.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join(''):`<option value="">${placeholder}</option>`}
 function setControls(profile){
- const cols=profile.column_profile.map(c=>c.column);
  const dates=profile.column_profile.filter(c=>c.dtype.includes('date')||c.column.toLowerCase().includes('date')||c.column.toLowerCase().includes('signup')).map(c=>c.column);
- const nums=profile.column_profile.filter(c=>['int','float','number'].some(x=>c.dtype.includes(x))).map(c=>c.column);
- fillSelect('dateSource',dates,'No date column detected');fillSelect('classSource',cols,'Select source');
- fillSelect('calcA',nums,'No numeric columns');fillSelect('calcB',nums,'No numeric columns');
+ fillSelect('dateSource',dates,'No date column detected');
  const d=$('dateSource').value; $('dateNew').value=d?d+'_year':'new_column';
- const c=$('classSource').value; $('classNew').value=c?(c==='age'?'age_group':c+'_group'):'new_column';
- const a=$('calcA').value; const b=$('calcB').value; $('calcNew').value=(a&&b)?a+'_x_'+b:'calculated_value';
  renderCleanControls(profile);
 }
 function renderCleanControls(p){
@@ -162,7 +157,7 @@ async function clean(){
   $('cleanOut').innerHTML=`<div class="sectionline"><b>Cleaning result for ${esc(x.file)}</b></div>
   <table><thead><tr><th>Issue</th><th>Column</th><th>Action</th><th>Before</th><th>After</th></tr></thead><tbody>${actions}</tbody></table>
   <p><b>Dataset summary:</b> Rows ${x.before.rows.toLocaleString()} → ${x.after.rows.toLocaleString()} · Missing cells ${x.before.missing_cells.toLocaleString()} → ${x.after.missing_cells.toLocaleString()} · Duplicates ${x.before.duplicates} → ${x.after.duplicates}</p>
-
+  `;
  }catch(e){$('cleanOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
 }
 async function transformRequest(spec){
