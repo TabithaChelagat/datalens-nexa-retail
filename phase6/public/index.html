@@ -60,16 +60,8 @@ button.smallbtn{padding:7px 9px;font-size:12px}.filetag{display:inline-block;bac
 <p class="muted">Create a new column from columns already available in the selected dataset.</p>
 <div class="operation">
 <h4>Date transformations</h4>
+<p class="small muted">Create a new date-derived column from an existing date field.</p>
 <div class="row"><select id="dateSource"></select><select id="dateType"><option value="year">Extract year</option><option value="month">Extract month</option><option value="quarter">Extract quarter</option><option value="day_of_week">Extract day of week</option></select><input id="dateNew" placeholder="New column name"><button onclick="transformDate()">Create column</button></div>
-</div>
-<div class="operation">
-<h4>Classification</h4>
-<div class="row"><select id="classSource"></select><select id="classType"><option value="age_group">Age → Age Group</option><option value="revenue_band">Revenue → Revenue Band</option><option value="tenure_group">Tenure → Tenure Group</option></select><input id="classNew" placeholder="New column name"><button onclick="transformClass()">Create column</button></div>
-</div>
-<div class="operation">
-<h4>Calculations</h4>
-<div class="row"><select id="calcA"></select><select id="calcOp"><option value="multiply">× Multiply</option><option value="subtract">− Subtract</option><option value="add">+ Add</option><option value="divide">÷ Divide</option></select><select id="calcB"></select><input id="calcNew" placeholder="New column name"><button onclick="transformCalc()">Create column</button></div>
-<p class="small muted">Examples: quantity × unit_price → sales; revenue − cost → profit; profit ÷ revenue → profit margin.</p>
 </div>
 <div id="transformOut"></div>
 </section>
@@ -82,18 +74,9 @@ button.smallbtn{padding:7px 9px;font-size:12px}.filetag{display:inline-block;bac
 
 <section class="card wide">
 <h2>6. Ask DataLens</h2>
-<p class="muted">Ask a business question. DataLens uses controlled analytical functions for factual answers rather than sending raw CSVs to the model.</p>
-<div class="row"><input id="question" style="flex:1;min-width:240px" placeholder="e.g. Which stores are performing better?"><button onclick="ask()">Ask DataLens</button></div>
-<div style="margin-top:10px">
-<div class="pill" onclick="q('Which categories have the highest revenue?')">Top categories</div>
-<div class="pill" onclick="q('What is our overall profit margin?')">Profit margin</div>
-<div class="pill" onclick="q('Which products have the highest revenue?')">Top products</div>
-<div class="pill" onclick="q('Which stores are performing better?')">Store performance</div>
-<div class="pill" onclick="q('How many customers do we have?')">Customer count</div>
-<div class="pill" onclick="q('What is the monthly revenue trend?')">Monthly trend</div>
-<div class="pill" onclick="q('Are there any data-quality issues?')">Data quality</div>
-</div>
-<div id="askOut" class="chat" style="margin-top:14px"><span class="muted">Your evidence-backed answer will appear here.</span></div>
+<p class="muted">Choose a business question from the list. DataLens computes the answer from governed analytical functions and returns the result with a visualization.</p>
+<div class="row"><select id="questionSelect" style="flex:1;min-width:260px"><option value="">Choose a question to ask…</option></select><button onclick="askSelected()">Ask DataLens</button></div>
+<div id="askOut" class="chat" style="margin-top:14px"><span class="muted">Select a question to see an evidence-backed answer and visualization.</span></div>
 </section>
 </div>
 </div>
@@ -179,7 +162,7 @@ async function clean(){
   $('cleanOut').innerHTML=`<div class="sectionline"><b>Cleaning result for ${esc(x.file)}</b></div>
   <table><thead><tr><th>Issue</th><th>Column</th><th>Action</th><th>Before</th><th>After</th></tr></thead><tbody>${actions}</tbody></table>
   <p><b>Dataset summary:</b> Rows ${x.before.rows.toLocaleString()} → ${x.after.rows.toLocaleString()} · Missing cells ${x.before.missing_cells.toLocaleString()} → ${x.after.missing_cells.toLocaleString()} · Duplicates ${x.before.duplicates} → ${x.after.duplicates}</p>
-  <div class="compare"><div><h4>Before — first 5 rows</h4>${table(x.preview_before)}</div><div><h4>After — first 5 rows</h4>${table(x.preview_after)}</div></div>`;
+
  }catch(e){$('cleanOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
 }
 async function transformRequest(spec){
@@ -188,34 +171,75 @@ async function transformRequest(spec){
  }catch(e){$('transformOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
 }
 function transformDate(){transformRequest({type:$('dateType').value,source_column:$('dateSource').value,new_column:$('dateNew').value})}
-function transformClass(){transformRequest({type:$('classType').value,source_column:$('classSource').value,new_column:$('classNew').value})}
-function transformCalc(){transformRequest({type:'calculation',source_column:$('calcA').value,second_column:$('calcB').value,operator:$('calcOp').value,new_column:$('calcNew').value})}
 
 function renderChart(canvasId,cfg){
  const old=chartObjects[canvasId];if(old)old.destroy();
- chartObjects[canvasId]=new Chart($(canvasId),{type:cfg.type,data:{labels:cfg.labels,datasets:cfg.datasets.map(d=>({...d,borderWidth:2,tension:.25}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}});
+ chartObjects[canvasId]=new Chart($(canvasId),{type:cfg.type,data:{labels:cfg.labels,datasets:cfg.datasets.map(d=>({...d,borderWidth:2,tension:.25}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true},title:{display:!!cfg.title,text:cfg.title}},scales:cfg.type==='doughnut'?{}:{y:{beginAtZero:true}}}});
 }
 async function analytics(){
  try{let x=await j('/api/analytics'),k=x.kpis;
  $('analyticsOut').innerHTML=`<div class="kpis" style="margin:14px 0">${[['Revenue',k.revenue.toFixed(2)],['Profit',k.profit.toFixed(2)],['Orders',k.orders.toLocaleString()],['Customers',k.customers.toLocaleString()],['AOV',k.aov.toFixed(2)],['Margin',(k.profit_margin*100).toFixed(1)+'%']].map(a=>`<div class="kpi">${a[0]}<strong>${a[1]}</strong></div>`).join('')}</div>
- <h3>Monthly revenue and profit</h3><div class="chartbox"><canvas id="monthlyChart"></canvas></div>${table(x.monthly)}
- <h3>Sales by store</h3><div class="chartbox"><canvas id="storeChart"></canvas></div>${table(x.stores)}
- <h3>Sales by category</h3><div class="chartbox"><canvas id="catChart"></canvas></div>${table(x.categories)}
- <h3>Top products</h3>${table(x.top_products)}`;
+ <h3>Monthly revenue and profit</h3><div class="chartbox"><canvas id="monthlyChart"></canvas></div>
+ <h3>Sales by store and region</h3><p class="small muted">Stores are grouped visually by their region so store performance can be read in geographic context.</p><div class="chartbox"><canvas id="storeChart"></canvas></div>
+ <h3>Sales by category</h3><div class="chartbox"><canvas id="catChart"></canvas></div>
+ <h3>Top products by revenue</h3><div class="chartbox"><canvas id="productChart"></canvas></div>`;
  renderChart('monthlyChart',{type:'line',labels:x.monthly.map(r=>r.month),datasets:[{label:'Revenue',data:x.monthly.map(r=>r.revenue)},{label:'Profit',data:x.monthly.map(r=>r.profit)}]});
- renderChart('storeChart',{type:'bar',labels:x.stores.map(r=>r.store_name||r.store_id),datasets:[{label:'Revenue',data:x.stores.map(r=>r.revenue)}]});
- renderChart('catChart',{type:'bar',labels:x.categories.map(r=>r.category),datasets:[{label:'Revenue',data:x.categories.map(r=>r.revenue)}]});
+ const regionColors={'Nairobi':'#2563eb','Rift Valley':'#16a34a','Coast':'#f59e0b','Western':'#9333ea'};
+ const regions=[...new Set(x.stores.map(r=>r.region||'Other'))];
+ const labels=x.stores.map(r=>r.store_name||r.store_id);
+ const storeDatasets=regions.map(region=>({
+   label:region,data:x.stores.map(r=>(r.region||'Other')===region?r.revenue:null),
+   backgroundColor:regionColors[region]||'#64748b',borderColor:regionColors[region]||'#64748b',borderWidth:1
+ }));
+ renderChart('storeChart',{type:'bar',labels,datasets:storeDatasets});
+ renderChart('catChart',{type:'bar',labels:x.categories.map(r=>r.category),datasets:[{label:'Revenue',data:x.categories.map(r=>r.revenue),backgroundColor:'#5aa9e6',borderColor:'#3182bd'}]});
+ renderChart('productChart',{type:'bar',labels:x.top_products.map(r=>r.product_name),datasets:[{label:'Revenue',data:x.top_products.map(r=>r.revenue),backgroundColor:'#8ecae6',borderColor:'#3182bd'}]});
  }catch(e){$('analyticsOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
 }
-function q(s){$('question').value=s;ask()}
-async function ask(){
- let question=$('question').value.trim();if(!question)return;$('askOut').innerHTML='<span class="muted">Computing from governed DataLens functions…</span>';
- try{let x=await j('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});
- let chart=x.chart?`<div class="chartbox"><canvas id="askChart"></canvas></div>`:'';
- $('askOut').innerHTML=`<div class="answer"><b>Answer</b><br>${esc(x.answer)}</div>${chart}<hr><div class="small"><b>Evidence:</b> ${esc(x.evidence||'')} </div>`;
- if(x.chart)renderChart('askChart',x.chart);
+const ASK_QUESTIONS=[
+ "Which region generates the most revenue?",
+ "Which region generates the most profit?",
+ "Which store has the highest profit margin?",
+ "Which store has the lowest profit margin?",
+ "Which category has the highest profit margin?",
+ "Which category contributes the most profit?",
+ "Which product generates the most profit?",
+ "Which product has the lowest profit margin?",
+ "Which month had the highest revenue?",
+ "Which month had the lowest revenue?",
+ "Which month had the highest profit?",
+ "Which store has the highest average order value?",
+ "Which region has the most completed orders?",
+ "What share of revenue comes from the top category?",
+ "What share of revenue comes from the top 3 products?",
+ "How many customers placed completed orders?",
+ "What is the average discount on completed sales?",
+ "Which category has the highest average discount?",
+ "Which store has the highest revenue per order?",
+ "Are there data-quality issues that could affect analysis?"
+];
+function initAskQuestions(){
+ const s=$('questionSelect');
+ s.innerHTML='<option value="">Choose a question to ask…</option>'+ASK_QUESTIONS.map((q,i)=>`<option value="${i}">${esc(q)}</option>`).join('');
+}
+function askSelected(){
+ const s=$('questionSelect');
+ const question=s.options[s.selectedIndex]?.text||'';
+ if(!s.value)return;
+ ask(question);
+}
+async function ask(question){
+ if(!question)return;
+ $('askOut').innerHTML='<span class="muted">Computing from governed DataLens functions…</span>';
+ try{
+   let x=await j('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});
+   let chart=x.chart?`<div class="chartbox"><canvas id="askChart"></canvas></div>`:'';
+   $('askOut').innerHTML=`<div class="answer"><b>Answer</b><br>${esc(x.answer)}</div>${chart}<hr><div class="small"><b>Evidence:</b> ${esc(x.evidence||'')} </div>`;
+   if(x.chart)renderChart('askChart',x.chart);
  }catch(e){$('askOut').innerHTML=`<div class="issue">${esc(e.message)}</div>`}
 }
+
+initAskQuestions();
 init();
 </script>
 </body></html>

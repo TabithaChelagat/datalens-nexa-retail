@@ -377,15 +377,31 @@ def analytics():
     profit = float(completed.profit.sum())
     orders = int(completed.order_id.nunique())
     customers = int(o[o.status.eq("Completed")].customer_id.nunique())
-    monthly = completed.groupby("month", dropna=True).agg(revenue=("revenue", "sum"), profit=("profit", "sum")).reset_index().tail(24)
-    by_store = completed.groupby("store_id").agg(revenue=("revenue", "sum"), profit=("profit", "sum")).reset_index().merge(s, on="store_id", how="left").sort_values("revenue", ascending=False).head(10)
-    by_cat = completed.groupby("category").agg(revenue=("revenue", "sum"), profit=("profit", "sum")).reset_index().sort_values("revenue", ascending=False)
-    top_products = completed.groupby(["product_id", "product_name"]).agg(revenue=("revenue", "sum"), profit=("profit", "sum")).reset_index().sort_values("revenue", ascending=False).head(10)
+    monthly = completed[completed["month"].ne("NaT")].groupby("month", dropna=True).agg(revenue=("revenue", "sum"), profit=("profit", "sum")).reset_index().tail(24)
+    by_store = completed.groupby("store_id").agg(revenue=("revenue", "sum"), profit=("profit", "sum"), orders=("order_id", "nunique")).reset_index().merge(s, on="store_id", how="left")
+    by_store["profit_margin"] = by_store["profit"].div(by_store["revenue"]).fillna(0)
+    by_store["aov"] = by_store["revenue"].div(by_store["orders"].replace(0, pd.NA)).fillna(0)
+    by_store["revenue_per_order"] = by_store["aov"]
+    by_store = by_store.sort_values("revenue", ascending=False).head(10)
+    by_cat = completed.groupby("category").agg(revenue=("revenue", "sum"), profit=("profit", "sum"), orders=("order_id", "nunique")).reset_index()
+    by_cat["profit_margin"] = by_cat["profit"].div(by_cat["revenue"]).fillna(0)
+    by_cat["avg_discount"] = completed.groupby("category")["discount"].mean().reindex(by_cat["category"]).fillna(0).values
+    by_cat = by_cat.sort_values("revenue", ascending=False)
+    top_products = completed.groupby(["product_id", "product_name"]).agg(revenue=("revenue", "sum"), profit=("profit", "sum")).reset_index()
+    top_products["profit_margin"] = top_products["profit"].div(top_products["revenue"]).fillna(0)
+    top_products = top_products.sort_values("revenue", ascending=False).head(10)
+    by_region = completed.merge(s[["store_id","region"]], on="store_id", how="left").groupby("region").agg(
+        revenue=("revenue","sum"), profit=("profit","sum"), orders=("order_id","nunique")
+    ).reset_index()
+    by_region["profit_margin"] = by_region["profit"].div(by_region["revenue"]).fillna(0)
+    by_region = by_region.sort_values("revenue", ascending=False)
     return {
         "kpis": {"revenue": revenue, "profit": profit, "orders": orders, "customers": customers,
-                 "aov": revenue / orders if orders else 0, "profit_margin": profit / revenue if revenue else 0},
+                 "aov": revenue / orders if orders else 0, "profit_margin": profit / revenue if revenue else 0,
+                 "avg_discount": float(completed["discount"].mean()) if len(completed) else 0},
         "monthly": monthly.to_dict("records"), "stores": by_store.to_dict("records"),
-        "categories": by_cat.to_dict("records"), "top_products": top_products.to_dict("records")
+        "categories": by_cat.to_dict("records"), "top_products": top_products.to_dict("records"),
+        "regions": by_region.to_dict("records")
     }
 
 
@@ -403,52 +419,124 @@ def tool_result(tool, args):
 
 def local_answer(question):
     a = analytics()
-    q = question.lower()
-    if ("store" in q) and ("perform" in q or "better" in q or "revenue" in q or "profit" in q):
-        rows = a["stores"][:5]
-        return "Store performance by revenue: " + "; ".join(f"{r.get('store_name', r['store_id'])} — revenue {r['revenue']:.2f}, profit {r['profit']:.2f}" for r in rows), "stores"
-    if "customer" in q and ("how many" in q or "count" in q or "number" in q):
+    q = " ".join(question.lower().strip().split())
+    r = a["regions"]
+    stores = a["stores"]
+    cats = a["categories"]
+    products = a["top_products"]
+    months = a["monthly"]
+
+    if "region generates the most revenue" in q:
+        x=r.iloc[0] if hasattr(r, "iloc") else r[0]
+        return f"{x['region']} generates the most revenue at {x['revenue']:.2f}.", "region_revenue"
+    if "region generates the most profit" in q:
+        x=max(r, key=lambda z:z["profit"])
+        return f"{x['region']} generates the most profit at {x['profit']:.2f}.", "region_profit"
+    if "highest profit margin" in q and "store" in q:
+        x=max(stores, key=lambda z:z["profit_margin"])
+        return f"{x['store_name']} has the highest store-level profit margin at {x['profit_margin']:.1%}.", "store_margin"
+    if "lowest profit margin" in q and "store" in q:
+        x=min(stores, key=lambda z:z["profit_margin"])
+        return f"{x['store_name']} has the lowest store-level profit margin at {x['profit_margin']:.1%}.", "store_margin"
+    if "category has the highest profit margin" in q:
+        x=max(cats, key=lambda z:z["profit_margin"])
+        return f"{x['category']} has the highest category profit margin at {x['profit_margin']:.1%}.", "category_margin"
+    if "category contributes the most profit" in q:
+        x=max(cats, key=lambda z:z["profit"])
+        return f"{x['category']} contributes the most profit at {x['profit']:.2f}.", "category_profit"
+    if "product generates the most profit" in q:
+        x=max(products, key=lambda z:z["profit"])
+        return f"{x['product_name']} generates the most profit at {x['profit']:.2f}.", "product_profit"
+    if "product has the lowest profit margin" in q:
+        x=min(products, key=lambda z:z["profit_margin"])
+        return f"Among the top 10 products by revenue, {x['product_name']} has the lowest profit margin at {x['profit_margin']:.1%}.", "product_margin"
+    if "month had the highest revenue" in q:
+        x=max(months, key=lambda z:z["revenue"])
+        return f"{x['month']} had the highest monthly revenue at {x['revenue']:.2f}.", "monthly_revenue"
+    if "month had the lowest revenue" in q:
+        x=min(months, key=lambda z:z["revenue"])
+        return f"{x['month']} had the lowest monthly revenue at {x['revenue']:.2f}.", "monthly_revenue"
+    if "month had the highest profit" in q:
+        x=max(months, key=lambda z:z["profit"])
+        return f"{x['month']} had the highest monthly profit at {x['profit']:.2f}.", "monthly_profit"
+    if "highest average order value" in q:
+        x=max(stores, key=lambda z:z["aov"])
+        return f"{x['store_name']} has the highest average order value at {x['aov']:.2f}.", "store_aov"
+    if "region has the most completed orders" in q:
+        x=max(r, key=lambda z:z["orders"])
+        return f"{x['region']} has the most completed orders, with {x['orders']:,}.", "region_orders"
+    if "share of revenue comes from the top category" in q:
+        x=cats[0]
+        share=x["revenue"]/a["kpis"]["revenue"] if a["kpis"]["revenue"] else 0
+        return f"{x['category']} contributes {share:.1%} of completed revenue.", "category_share"
+    if "share of revenue comes from the top 3 products" in q:
+        share=sum(x["revenue"] for x in products[:3])/a["kpis"]["revenue"] if a["kpis"]["revenue"] else 0
+        return f"The top 3 products shown contribute {share:.1%} of completed revenue.", "product_share"
+    if "how many customers" in q:
         return f"There are {a['kpis']['customers']:,} customers associated with completed orders in the governed analytics dataset.", "customers"
-    if ("trend" in q or "monthly" in q) and ("revenue" in q or "profit" in q or "sales" in q):
-        return "The monthly revenue/profit trend is shown in the chart and table below.", "trend"
-    if ("top" in q or "highest" in q or "best" in q) and "categor" in q:
-        return "Top categories by revenue: " + ", ".join(f"{x['category']} ({x['revenue']:.2f})" for x in a["categories"][:3]), "categories"
-    if ("top" in q or "highest" in q or "best" in q) and "product" in q:
-        return "Top products by revenue: " + ", ".join(f"{x['product_name']} ({x['revenue']:.2f})" for x in a["top_products"][:3]), "products"
-    if "margin" in q:
-        return f"Overall profit margin is {a['kpis']['profit_margin']:.1%}, based on computed revenue and profit.", "margin"
-    if "quality" in q or "issue" in q:
+    if "average discount" in q and "category" not in q:
+        return f"The average discount on completed sales is {a['kpis']['avg_discount']:.1%}.", "discount"
+    if "category has the highest average discount" in q:
+        x=max(cats, key=lambda z:z["avg_discount"])
+        return f"{x['category']} has the highest average discount at {x['avg_discount']:.1%}.", "category_discount"
+    if "highest revenue per order" in q:
+        x=max(stores, key=lambda z:z["revenue_per_order"])
+        return f"{x['store_name']} has the highest revenue per completed order at {x['revenue_per_order']:.2f}.", "store_aov"
+    if "data-quality issues" in q or "data quality" in q:
         total = sum(quality(load(f))["issue_count"] for f in files())
-        return f"The raw demo files contain {total} detected issue type(s). Use the Data Quality stage for the file-level findings and counts.", "quality"
-    if "revenue" in q or "profit" in q or "kpi" in q:
-        return f"Revenue is {a['kpis']['revenue']:.2f}, profit is {a['kpis']['profit']:.2f}, with {a['kpis']['orders']} completed orders and AOV of {a['kpis']['aov']:.2f}.", "kpis"
-    return "I can answer questions about revenue, profit, margin, stores, categories, products, customers, monthly trends and data quality using computed DataLens functions.", None
+        return f"The raw demo files contain {total} detected issue type(s). The Data Quality stage provides the file-level findings and counts.", "quality"
+    return "Select one of the governed DataLens questions to receive a computed answer and visualization.", None
 
 
 def chart_for(kind):
     a = analytics()
-    if kind == "stores":
-        rows = a["stores"][:10]
-        return {"type": "bar", "title": "Revenue by store", "labels": [r.get("store_name", r["store_id"]) for r in rows],
-                "datasets": [{"label": "Revenue", "data": [r["revenue"] for r in rows]}]}
-    if kind == "categories":
-        rows = a["categories"]
-        return {"type": "bar", "title": "Revenue by category", "labels": [r["category"] for r in rows],
-                "datasets": [{"label": "Revenue", "data": [r["revenue"] for r in rows]}]}
-    if kind == "products":
-        rows = a["top_products"]
-        return {"type": "bar", "title": "Top products by revenue", "labels": [r["product_name"] for r in rows],
-                "datasets": [{"label": "Revenue", "data": [r["revenue"] for r in rows]}]}
-    if kind == "trend":
-        rows = a["monthly"]
-        return {"type": "line", "title": "Monthly revenue and profit", "labels": [r["month"] for r in rows],
-                "datasets": [{"label": "Revenue", "data": [r["revenue"] for r in rows]},
-                             {"label": "Profit", "data": [r["profit"] for r in rows]}]}
-    if kind == "margin":
-        return {"type": "bar", "title": "Revenue vs profit", "labels": ["Revenue", "Profit"],
-                "datasets": [{"label": "Amount", "data": [a["kpis"]["revenue"], a["kpis"]["profit"]]}]}
+    if kind == "region_revenue":
+        return {"type":"bar","title":"Revenue by region","labels":[x["region"] for x in a["regions"]],"datasets":[{"label":"Revenue","data":[x["revenue"] for x in a["regions"]],"backgroundColor":["#2563eb","#16a34a","#f59e0b","#9333ea"]}]}
+    if kind == "region_profit":
+        rows=sorted(a["regions"],key=lambda x:x["profit"],reverse=True)
+        return {"type":"bar","title":"Profit by region","labels":[x["region"] for x in rows],"datasets":[{"label":"Profit","data":[x["profit"] for x in rows],"backgroundColor":["#2563eb","#16a34a","#f59e0b","#9333ea"]}]}
+    if kind == "store_margin":
+        rows=sorted(a["stores"],key=lambda x:x["profit_margin"],reverse=True)
+        return {"type":"bar","title":"Store profit margin","labels":[x["store_name"] for x in rows],"datasets":[{"label":"Margin","data":[x["profit_margin"]*100 for x in rows],"backgroundColor":"#5aa9e6"}]}
+    if kind == "category_margin":
+        rows=sorted(a["categories"],key=lambda x:x["profit_margin"],reverse=True)
+        return {"type":"bar","title":"Category profit margin","labels":[x["category"] for x in rows],"datasets":[{"label":"Margin %","data":[x["profit_margin"]*100 for x in rows],"backgroundColor":"#5aa9e6"}]}
+    if kind == "category_profit":
+        rows=sorted(a["categories"],key=lambda x:x["profit"],reverse=True)
+        return {"type":"bar","title":"Profit by category","labels":[x["category"] for x in rows],"datasets":[{"label":"Profit","data":[x["profit"] for x in rows],"backgroundColor":"#5aa9e6"}]}
+    if kind in ("product_profit","product_margin"):
+        rows=sorted(a["top_products"],key=lambda x:x["profit" if kind=="product_profit" else "profit_margin"],reverse=(kind=="product_profit"))
+        return {"type":"bar","title":"Product profitability","labels":[x["product_name"] for x in rows],"datasets":[{"label":"Profit" if kind=="product_profit" else "Margin %","data":[x["profit"] if kind=="product_profit" else x["profit_margin"]*100 for x in rows],"backgroundColor":"#8ecae6"}]}
+    if kind in ("monthly_revenue","monthly_profit"):
+        field="revenue" if kind=="monthly_revenue" else "profit"
+        return {"type":"bar","title":"Monthly "+field,"labels":[x["month"] for x in a["monthly"]],"datasets":[{"label":field.title(),"data":[x[field] for x in a["monthly"]],"backgroundColor":"#5aa9e6"}]}
+    if kind == "store_aov":
+        rows=sorted(a["stores"],key=lambda x:x["aov"],reverse=True)
+        return {"type":"bar","title":"Average order value by store","labels":[x["store_name"] for x in rows],"datasets":[{"label":"AOV","data":[x["aov"] for x in rows],"backgroundColor":"#8ecae6"}]}
+    if kind == "region_orders":
+        rows=sorted(a["regions"],key=lambda x:x["orders"],reverse=True)
+        return {"type":"bar","title":"Completed orders by region","labels":[x["region"] for x in rows],"datasets":[{"label":"Orders","data":[x["orders"] for x in rows],"backgroundColor":["#2563eb","#16a34a","#f59e0b","#9333ea"]}]}
+    if kind == "category_share":
+        x=a["categories"][0]
+        return {"type":"doughnut","title":"Top category revenue share","labels":[x["category"],"All other categories"],"datasets":[{"label":"Revenue share","data":[x["revenue"],a["kpis"]["revenue"]-x["revenue"]],"backgroundColor":["#2563eb","#d1d5db"]}]}
+    if kind == "product_share":
+        top=sum(x["revenue"] for x in a["top_products"][:3])
+        return {"type":"doughnut","title":"Top 3 product revenue share","labels":["Top 3 products","All other revenue"],"datasets":[{"label":"Revenue","data":[top,a["kpis"]["revenue"]-top],"backgroundColor":["#2563eb","#d1d5db"]}]}
     if kind == "customers":
-        return {"type": "bar", "title": "Customer count", "labels": ["Customers"], "datasets": [{"label": "Customers", "data": [a["kpis"]["customers"]]}]}
+        return {"type":"bar","title":"Completed-order customers","labels":["Customers"],"datasets":[{"label":"Customers","data":[a["kpis"]["customers"]],"backgroundColor":"#5aa9e6"}]}
+    if kind == "discount":
+        return {"type":"bar","title":"Average discount","labels":["Completed sales"],"datasets":[{"label":"Discount %","data":[a["kpis"]["avg_discount"]*100],"backgroundColor":"#f59e0b"}]}
+    if kind == "category_discount":
+        rows=sorted(a["categories"],key=lambda x:x["avg_discount"],reverse=True)
+        return {"type":"bar","title":"Average discount by category","labels":[x["category"] for x in rows],"datasets":[{"label":"Discount %","data":[x["avg_discount"]*100 for x in rows],"backgroundColor":"#f59e0b"}]}
+    if kind == "quality":
+        rows=[]
+        for f in files():
+            q=quality(load(f))
+            for issue in q["issues"]:
+                rows.append({"label":f"{f}: {issue['type']} — {issue['column']}", "count":issue["count"]})
+        rows=sorted(rows,key=lambda x:x["count"],reverse=True)
+        return {"type":"bar","title":"Detected data-quality findings","labels":[x["label"] for x in rows],"datasets":[{"label":"Affected records/cells","data":[x["count"] for x in rows],"backgroundColor":"#f59e0b"}]} if rows else None
     return None
 
 

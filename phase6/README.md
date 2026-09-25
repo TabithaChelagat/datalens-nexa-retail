@@ -70,3 +70,11 @@ If an Anthropic API key is configured, the model may use the same governed funct
 - `phase6/README.md` — updated v7 workflow and implementation notes.
 
 `phase6/vercel.json` and `phase6/requirements.txt` are unchanged from the known-good v6 deployment.
+
+
+## Phase 6 Demo v8 UI updates
+- Explore remains separate from Data Quality.
+- Cleaning retains issue/action/effect summaries without before/after row previews.
+- Transform exposes date-derived columns only in the UI.
+- Analyze uses charts without duplicate tables; store chart groups stores by region with region-specific colors.
+- Ask DataLens uses a governed dropdown of business questions with computed answers and matching visualizations.
